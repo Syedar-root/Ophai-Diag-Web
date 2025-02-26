@@ -6,7 +6,7 @@ interface PatientInfo{
     gender: string;
 }
 
-interface  HistoryCase{
+interface HistoryCase{
     id:number;
     date:Date;
     description:string;
