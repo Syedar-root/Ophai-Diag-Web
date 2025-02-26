@@ -1,0 +1,23 @@
+$colors:(
+        primary: #3ea2e4,
+        success: #43cd88,
+        info: #bebebe,
+        warning: #ffb15f,
+        danger: #f74047,
+);
+@each $key, $value in $colors {
+    // 生成浅色变体
+    @for $i from 2 to 5{
+      $light: mix(#fff,$value,($i - 1)/5*100%);
+      $colors:map-merge($colors, (#{$key}-light-#{$i - 1},$light));
+    }
+    @for $i from 2 to 5{
+      $dark: mix(#000,$value,($i - 1)/5 * 100%);
+      $colors:map-merge($colors, (#{$key}-dark-#{$i - 1},$dark));
+    }
+}
+$colors: map-merge($colors, (_white,#fafafa));
+$colors: map-merge($colors, (_black,#222222));
+@for $i from 2 to 10{
+  $neutral:mix(map-get($colors,_white), map-get($colors,_dark), ($i - 1)/10*100%);
+}
