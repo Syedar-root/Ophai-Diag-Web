@@ -1,23 +1,29 @@
-$colors:(
-        primary: #3ea2e4,
-        success: #43cd88,
-        info: #bebebe,
-        warning: #ffb15f,
-        danger: #f74047,
+$colors: (
+    primary: #3ea2e4,
+    success: #43cd88,
+    info: #bebebe,
+    warning: #ffb15f,
+    danger: #f74047,
 );
+
+$MaxStep: 9;
+// 生成浅色和深色变体
 @each $key, $value in $colors {
-    // 生成浅色变体
-    @for $i from 2 to 5{
-      $light: mix(#fff,$value,($i - 1)/5*100%);
-      $colors:map-merge($colors, (#{$key}-light-#{$i - 1},$light));
-    }
-    @for $i from 2 to 5{
-      $dark: mix(#000,$value,($i - 1)/5 * 100%);
-      $colors:map-merge($colors, (#{$key}-dark-#{$i - 1},$dark));
+    @for $i from 1 through $MaxStep {
+        $light: mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
+        $colors: map-merge($colors, (#{$key}-light-#{$i}: $light));
+        
+        $dark: mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
+        $colors: map-merge($colors, (#{$key}-dark-#{$i}: $dark));
     }
 }
-$colors: map-merge($colors, (_white,#fafafa));
-$colors: map-merge($colors, (_black,#222222));
-@for $i from 2 to 10{
-  $neutral:mix(map-get($colors,_white), map-get($colors,_dark), ($i - 1)/10*100%);
+
+// 添加 _white 和 _black
+$colors: map-merge($colors, (_white: #fafafa));
+$colors: map-merge($colors, (_black: #222222));
+
+// 生成中性色
+@for $i from 1 through 9 {
+    $neutral: mix(map-get($colors, _white), map-get($colors, _black), ($i * 10%));
+    $colors: map-merge($colors, (neutral-#{$i}: $neutral));
 }
