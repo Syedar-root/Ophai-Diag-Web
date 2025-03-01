@@ -1,7 +1,11 @@
 import { createApp } from 'vue'
 import './style.css'
 import "../src/assets/styles/index.css"
-import router from './router/index'
+import router from './router'
+import {setupDirectives} from "./util/custom_directive";
 import App from './App.vue'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App);
+// 注册自定义指令
+setupDirectives(app);
+app.use(router).mount('#app')

@@ -1,39 +1,34 @@
 <template>
-    <div class="container">
-        <div class="header">
-            <div class="wrap">
-                <div class="logoPos"></div>
-                <div class="menuPos"></div>
-                <div class="userPos"></div>
-            </div>
+    <div class="layout-container">
+        <div class="layout__header">
+          <Nav></Nav>
         </div>
-        <div class="main">
+        <div class="layout__main">
             <router-view></router-view>
         </div>
     </div>
 </template>
+<script setup lang="ts">
+import Nav from "../components/business/nav/index.vue";
+</script>
 
 <style scoped>
-.container {
+.layout-container {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.header {
+.layout__header {
     width: 100%;
-    flex-grow: 1;
-    background-color: #000;
+    height: clamp(32px, 5vh, 64px);
 }
 
-.main {
+.layout__main {
     width: 100%;
-    flex-grow: 15;
-    background-color: #fff;
+    flex-grow: 1;
 }
 </style>
 
-<script setup>
 
-</script>

@@ -1,0 +1,90 @@
+@use '../../../assets/styles/vars.scss' as vars;
+.nav-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: map-get(vars.$colors,_white);
+}
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// logo area
+.nav__logo-area {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  @include flex-center();
+}
+
+// tab area
+.nav__tab-area {
+  position: relative;
+  flex-grow: 16;
+  height: 100%;
+  @include flex-center();
+  justify-content: start;
+  gap: 16px;
+  .tab-item{
+    position: relative;
+    @include flex-center();
+    height: 100%;
+    $color:map-get(vars.$colors,primary);
+    span{
+      width: 100%;
+      font-size: map-get(vars.$font-size,m);
+      background: linear-gradient(to right, $color, $color) no-repeat right bottom;
+      background-size: 0 2px ;
+      transition-duration: 0.3s;
+      transition-property: background-size,color;
+      transition-timing-function: ease-in-out;
+      cursor: pointer;
+      &:hover{
+        color: $color;
+        background: linear-gradient(to right, $color, $color) no-repeat left bottom;
+        background-size: 100% 2px;
+      }
+    }
+    &.active{
+      span{
+        color: $color;
+        background: linear-gradient(to right, $color, $color) no-repeat left bottom;
+        background-size: 100% 2px;
+      }
+    }
+  }
+
+}
+
+// user area
+.nav__user-area {
+  position: relative;
+  flex-grow: 4;
+  height: 100%;
+  @include flex-center();
+  .user-item{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    .user-item__avatar{
+      @include flex-center();
+    }
+    .user-item__info{
+      @include flex-center();
+      flex-direction: column;
+      align-items: start;
+
+      .user-item__info__name{
+        font-size: map-get(vars.$font-size,s);
+      }
+     .user-item__info__department{
+        font-size: map-get(vars.$font-size,xs);
+     }
+    }
+  }
+}
