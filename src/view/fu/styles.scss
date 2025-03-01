@@ -1,0 +1,154 @@
+@use "/src/assets/styles/vars.scss" as vars;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fu-container {
+  width: 100%;
+  height: 100%;
+  @include flex-center;
+  flex-direction: column;
+  justify-content: start;
+  background-color: map-get(vars.$colors, _white);
+  gap: 1rem;
+}
+.fu-container__title{
+  width: 100%;
+  @include flex-center;
+  justify-content: start;
+  span{
+    font-size: map-get(vars.$font-size, l);
+    font-weight: 600;
+    color: map-get(vars.$colors, neutral-2);
+  }
+}
+.fu-container__main{
+  width: 100%;
+  height: 100%;
+  @include flex-center;
+}
+.fu-container__footer{
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 5rem;
+  border-top: 1px solid map-get(vars.$colors, neutral-9);
+  background-color: #fff;
+}
+.move--up-enter-active,
+.move--up-leave-active {
+  transition: all 0.5s ease;
+}
+.move--up-enter-from,
+.move--up-leave-to {
+  transform: translateY(100%);
+}
+
+.fu-container__block{
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  $gap: 1.5rem;
+  padding: $gap;
+  margin-top: 1rem;
+  border: 1px solid map-get(vars.$colors, neutral-9);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.fu-container__left{
+  @include flex-center;
+  flex-direction: column;
+  justify-content: start;
+  flex-shrink: 0;
+  height: 100%;
+  width: 35%;
+  gap: 1rem;
+  margin-left: 1rem;
+  .fu-container__upload{
+    width: 100%;
+    height: auto;
+    .upload--text{
+      font-size: map-get(vars.$font-size, m);
+      &:active{
+         color: map-get(vars.$colors, primary);
+      }
+    }
+    .upload--tip{
+      display: flex;
+      justify-content: start;
+      padding-left:0.5rem ;
+      font-size: map-get(vars.$font-size, s);
+      color: map-get(vars.$colors, neutral-5);
+    }
+  }
+
+  .fu-container__form{
+    width: 100%;
+    height: 100%;
+    :deep(label){
+      width: 100%;
+    }
+  }
+}
+
+.fu-container__right{
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
+  @include flex-center;
+  gap: 1rem;
+  align-items: start;
+  .original,
+  .process{
+    width: clamp(10rem, 70%, 20rem);
+    height: clamp(5rem, 30%, 30rem);
+    @include flex-center;
+    flex-direction: column;
+    align-items:center ;
+    margin-bottom: 5%;
+    span{
+      font-size: map-get(vars.$font-size, m);
+      font-weight: 600;
+      align-self: center;
+      margin-bottom: 0.1rem;
+    }
+  }
+  .fu-container__image{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 0.5rem;
+    .image-slot{
+      width: 100%;
+      height: 100%;
+      @include flex-center;
+      background-color: map-get(vars.$colors, _white);
+    }
+  }
+}
+
+.right__left{
+  height: 100%;
+  width: 50%;
+  @include flex-center;
+  flex-direction: column;
+  justify-content: start;
+  padding: 1rem;
+}
+.right__right{
+  height: 100%;
+  width: 50%;
+  @include flex-center;
+  flex-direction: column;
+  justify-content: start;
+  padding: 1rem;
+}
