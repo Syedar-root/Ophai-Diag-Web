@@ -128,9 +128,9 @@
 
 <script lang="ts" setup>
 import { ref, onMounted,computed } from "vue";
-import {ffDTO} from "@/view/fu/types.ts";
+import type {ffDTO} from "@/view/fu/types.ts";
 
-const footerShow :boolean = ref(false);
+const footerShow = ref<boolean>(false);
 onMounted(()=>{
   document.addEventListener("mousemove",(e)=>{
     if (e.y > window.innerHeight/1.5) {

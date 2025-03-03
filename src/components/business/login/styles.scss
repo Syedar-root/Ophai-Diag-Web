@@ -1,0 +1,142 @@
+@use "@/assets/styles/vars.scss" as vars;
+
+.login-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  $color: map-get(vars.$colors,neutral-1);
+  background-color: rgba($color, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.login-content{
+  width: 20%;
+  height: 50%;
+  background-color: map-get(vars.$colors,_white);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 10px rgba(map-get(vars.$colors,neutral-5),0.5);
+}
+
+.login-content__logo{
+  width: 50%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-content__title{
+  width: 100%;
+  height: 10%;
+  font-weight: bold;
+  font-size: map-get(vars.$font-size, xl);
+}
+
+.login-content__form{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  .el-form{
+    width: 80%;
+    height: auto;
+
+    :deep{
+      .el-form-item{
+        margin-top: 1rem;
+        &.password-opt .el-form-item__content{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+      .el-input{
+        width: 100%;
+        height: clamp(1.5rem, 2.5rem, 3rem);
+        .el-input__wrapper{
+          border-radius: 0.5rem;
+          &.is-focus{
+            box-shadow:  0 0 0 1px map-get(vars.$colors,primary) inset;
+          }
+          &.is-hover{
+            box-shadow:  0 0 0 1px map-get(vars.$colors,neutral-7) inset;
+          }
+        }
+        .el-icon{
+          font-size: 1rem;
+          svg path{
+            fill: map-get(vars.$colors,neutral-5);
+          }
+        }
+      }
+      .el-button{
+        width: 100%;
+        height: clamp(1.5rem, 2.5rem, 3rem);
+        border-radius: 0.3rem;
+        background-color: map-get(vars.$colors,primary);
+        &:hover{
+          background-color: map-get(vars.$colors,primary-dark-1);
+        }
+      }
+
+      .el-checkbox{
+        &.is-checked {
+          .el-checkbox__inner{
+            background-color: map-get(vars.$colors,primary);
+            border-color: map-get(vars.$colors,primary);
+          }
+          .el-checkbox__label{
+            color: map-get(vars.$colors,primary);
+          }
+        }
+      }
+
+      .el-link{
+        color: map-get(vars.$colors,primary);
+        &:after{
+          border: 0;
+        }
+        .el-link__inner{
+          $underline-color: map-get(vars.$colors,primary-dark-1);
+          background: linear-gradient(to right, $underline-color, $underline-color) no-repeat right bottom;
+          background-size: 0 2px ;
+          transition-duration: 0.3s;
+          transition-property: background-size,color;
+          transition-timing-function: ease-in-out;
+          cursor: pointer;
+          &:hover{
+            color: $underline-color;
+            background: linear-gradient(to right, $underline-color, $underline-color) no-repeat left bottom;
+            background-size: 100% 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.login-content__register{
+  margin-top: -1.5rem;
+  width: 100%;
+  flex-grow: 1;
+
+  a{
+    font-size: map-get(vars.$font-size,s);
+    color: map-get(vars.$colors,neutral-5);
+    underline: none;
+  }
+}
