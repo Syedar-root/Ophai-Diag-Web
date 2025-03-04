@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-container">
+    <div class="layout-container" ref="layoutContainer">
         <div class="layout__header">
           <Nav></Nav>
         </div>
@@ -18,12 +18,16 @@ import Nav from "../components/business/nav/index.vue";
 import Login from "../components/business/login/index.vue";
 import { ref } from 'vue'
 
-const loginShow = ref(false);
+const layoutContainer = ref();
+const loginShow = ref<boolean>(false);
 const handleLoginShow = () => {
   loginShow.value = !loginShow.value;
 }
-document.addEventListener('click', (e) => {
-  handleLoginShow();
+
+onMounted(()=>{
+  layoutContainer.value?.addEventListener('click', ()=>{
+    handleLoginShow();
+  });
 })
 </script>
 

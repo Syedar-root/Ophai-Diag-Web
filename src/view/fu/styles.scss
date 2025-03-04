@@ -136,6 +136,9 @@
       height: 100%;
       @include flex-center;
       background-color: map-get(vars.$colors, _white);
+      .el-icon{
+        color: map-get(vars.$colors, neutral-5);
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
               <span>图片上传</span>
             </div>
             <el-upload class="fu-container__upload" :on-remove="handleFileRemove" :on-change="handleFileChange" action="#" drag multiple :auto-upload="false" accept=".jpg">
-              <el-icon class="el-icon--upload"><IconEpUploadFilled /></el-icon>
+              <el-icon class="el-icon--upload"><UploadFilled /></el-icon>
               <div class="upload--text">图片拖拽到此处或单击此处</div>
               <template #tip>
                 <div class="upload--tip">
@@ -71,7 +71,7 @@
                 <el-image class="fu-container__image" fit="contain" :preview-src-list="srcList" :src="previewImageList.rawLeft">
                   <template #error>
                     <div class="image-slot">
-                      <el-icon size="1.5rem"><IconEpPicture /></el-icon>
+                      <el-icon size="1.5rem"><Picture /></el-icon>
                     </div>
                   </template>
                 </el-image>
@@ -81,7 +81,7 @@
                 <el-image class="fu-container__image" fit="contain">
                   <template #error>
                     <div class="image-slot">
-                      <el-icon size="1.5rem"><IconEpPicture /></el-icon>
+                      <el-icon size="1.5rem"><Picture /></el-icon>
                     </div>
                   </template>
                 </el-image>
@@ -96,7 +96,7 @@
                 <el-image class="fu-container__image" fit="contain" :preview-src-list="srcList" :src="previewImageList.rawRight">
                   <template #error>
                     <div class="image-slot">
-                      <el-icon size="1.5rem"><IconEpPicture /></el-icon>
+                      <el-icon size="1.5rem"><Picture /></el-icon>
                     </div>
                   </template>
                 </el-image>
@@ -106,7 +106,7 @@
                 <el-image class="fu-container__image" fit="contain">
                   <template #error>
                     <div class="image-slot">
-                      <el-icon size="1.5rem"><IconEpPicture /></el-icon>
+                      <el-icon size="1.5rem"><Picture /></el-icon>
                     </div>
                   </template>
                 </el-image>
@@ -129,6 +129,7 @@
 <script lang="ts" setup>
 import { ref, onMounted,computed } from "vue";
 import type {ffDTO} from "@/view/fu/types.ts";
+import {Picture, UploadFilled} from "@element-plus/icons-vue";
 
 const footerShow = ref<boolean>(false);
 onMounted(()=>{
@@ -141,7 +142,7 @@ onMounted(()=>{
   })
 })
 
-const previewImageList = ref({
+const previewImageList = ref<any>({
   rawLeft: '',
   rawRight: '',
   processLeft:'',
