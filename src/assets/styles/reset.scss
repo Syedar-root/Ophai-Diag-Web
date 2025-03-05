@@ -1,0 +1,34 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+@mixin full-screen {
+  font-size: 16px;
+}
+@mixin middle-screen {
+  font-size: 14px;
+}
+@mixin small-screen {
+  font-size: 12px;
+}
+
+
+@media screen and (max-width: 480px) {
+  html{
+    @include small-screen;
+  }
+}
+
+@media  screen and (max-width: 768px) {
+  html{
+    @include middle-screen;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  html{
+    @include full-screen;
+  }
+}

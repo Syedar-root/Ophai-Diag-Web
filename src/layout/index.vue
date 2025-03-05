@@ -17,6 +17,7 @@
 import Nav from "../components/business/nav/index.vue";
 import Login from "../components/business/login/index.vue";
 import { ref } from 'vue'
+import {useUserStore} from "@/store/user";
 
 const layoutContainer = ref();
 const loginShow = ref<boolean>(false);
@@ -24,11 +25,37 @@ const handleLoginShow = () => {
   loginShow.value = !loginShow.value;
 }
 
-onMounted(()=>{
-  layoutContainer.value?.addEventListener('click', ()=>{
+const handleContainerClick = () => { // 定义具名函数
+  if (!userStore.user?.username) {
     handleLoginShow();
-  });
+  }
+};
+
+const userStore = useUserStore();
+
+
+onMounted(()=>{
+  // 初始化时根据用户状态添加监听
+  if (!userStore.user?.username) {
+    layoutContainer.value?.addEventListener('click', handleContainerClick);
+  }
 })
+
+onBeforeUnmount(() => {
+  layoutContainer.value?.removeEventListener('click', handleContainerClick);
+});
+
+// 监听用户状态变化
+watch(
+    () => userStore.user,
+    (newUser) => {
+      if (newUser?.username) {
+        layoutContainer.value?.removeEventListener('click', handleContainerClick);
+      } else {
+        layoutContainer.value?.addEventListener('click', handleContainerClick);
+      }
+    }
+);
 </script>
 
 <style scoped>

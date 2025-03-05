@@ -1,3 +1,5 @@
+@use "sass:map";
+@use "sass:color";
 $colors: (
     primary: #3ea2e4,
     success: #43cd88,
@@ -10,22 +12,22 @@ $MaxStep: 9;
 // 生成浅色和深色变体
 @each $key, $value in $colors {
     @for $i from 1 through $MaxStep {
-        $light: mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
-        $colors: map-merge($colors, (#{$key}-light-#{$i}: $light));
+        $light: color.mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
+        $colors: map.merge($colors, (#{$key}-light-#{$i}: $light));
         
-        $dark: mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
-        $colors: map-merge($colors, (#{$key}-dark-#{$i}: $dark));
+        $dark: color.mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
+        $colors: map.merge($colors, (#{$key}-dark-#{$i}: $dark));
     }
 }
 
 // 添加 _white 和 _black
-$colors: map-merge($colors, (_white: #fafafa));
-$colors: map-merge($colors, (_black: #222222));
+$colors: map.merge($colors, (_white: #fafafa));
+$colors: map.merge($colors, (_black: #222222));
 
 // 生成中性色
 @for $i from 1 through 9 {
-    $neutral: mix(map-get($colors, _white), map-get($colors, _black), ($i * 10%));
-    $colors: map-merge($colors, (neutral-#{$i}: $neutral));
+    $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i * 10%));
+    $colors: map.merge($colors, (neutral-#{$i}: $neutral));
 }
 
 $font-size:(

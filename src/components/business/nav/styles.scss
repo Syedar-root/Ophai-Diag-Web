@@ -1,7 +1,4 @@
 @use '../../../assets/styles/vars.scss' as vars;
-
-$tab-clr--text:map-get(vars.$colors,neutral-2);
-
 .nav-container {
   position: relative;
   width: 100%;
@@ -40,7 +37,6 @@ $tab-clr--text:map-get(vars.$colors,neutral-2);
     $color:map-get(vars.$colors,primary);
     span{
       width: 100%;
-      color: $tab-clr--text;
       font-size: map-get(vars.$font-size,m);
       background: linear-gradient(to right, $color, $color) no-repeat right bottom;
       background-size: 0 2px ;

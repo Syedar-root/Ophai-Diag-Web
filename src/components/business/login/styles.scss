@@ -37,6 +37,23 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   min-width: 16rem;
   min-height: 32rem;
   @include base-content;
+
+  .login-section{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+  .register-section{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
 }
 
 .login-content__logo{
@@ -51,11 +68,11 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
     position: absolute;
     height: 50%;
     object-fit: contain;
-
   }
 }
 
 .login-content__title{
+  color: map-get(vars.$colors,neutral-2);
   width: 100%;
   height: 10%;
   color: $title-clr--text;
@@ -149,10 +166,9 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
 }
 
 .login-content__register{
-  margin-top: -1.5rem;
+  margin-top: -1rem;
   width: 100%;
   flex-grow: 1;
-
   a{
     font-size: map-get(vars.$font-size,s);
     color: map-get(vars.$colors,neutral-5);
@@ -189,8 +205,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -5%;
-  margin-bottom: 2%;
+  transform: translateY(-80%);
 }
 
 .register-content__form{
@@ -251,10 +266,17 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .3s;
+  transition: all 0.25s ease-in-out;
 }
-.fade-enter-from,
+.fade-enter-active{
+  transition-delay: 0.25s;
+}
+.fade-enter-from{
+  opacity: 0;
+  transform: translateY(100%);
+}
 .fade-leave-to {
   opacity: 0;
+  transform: translateY(-100%);
 }
 
