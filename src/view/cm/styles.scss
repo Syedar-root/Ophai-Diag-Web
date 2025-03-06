@@ -1,0 +1,122 @@
+@use "@/assets/styles/vars.scss" as vars;
+@use "@/assets/styles/resetElement.scss" as resetElement;
+@use "sass:map";
+
+
+.cm-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  $padding: map.get(vars.$space, l);
+  $gap: map.get(vars.$space, s);
+  padding: $padding;
+  gap: $gap;
+}
+
+.cm-header{
+  position: relative;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  $padding: map.get(vars.$space, m);
+  padding: $padding;
+
+  .header-input-row{
+    height: 30%;
+    align-items: center;
+    .el-col{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      .el-input{
+        width: 100%;
+        height: 100%;
+        @include resetElement.resetInput();
+      }
+      .el-button{
+        width: 60%;
+        height: 100%;
+        @include resetElement.resetButton();
+      }
+    }
+  }
+  .header-select-row{
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    :deep(.select-area){
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      label{
+        font-size: map.get(vars.$font-size, s);
+        color: map.get(vars.$colors, neutral-3);
+      }
+      .el-select{
+        width: 100%;
+        height: 100%;
+        @include resetElement.resetSelect();
+      }
+    }
+  }
+}
+
+.cm-main{
+  position: relative;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  $padding: map.get(vars.$space, m);
+  padding: $padding ;
+
+  .el-table{
+    --el-table-header-bg-color: #{map.get(vars.$colors, _white)};
+  }
+
+  .el-table{
+    position: relative;
+    width: 100%;
+    height: auto;
+    :deep(.el-scrollbar__view){
+      width: 100%;
+    }
+
+    .table-opt{
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.cm-footer{
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .el-pagination{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

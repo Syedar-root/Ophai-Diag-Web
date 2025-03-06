@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "./vars.scss" as vars;
+
+@mixin resetInput() {
+  :deep(.el-input__wrapper){
+    border-radius: 0.5rem;
+    &.is-focus{
+      box-shadow:  0 0 0 1px map.get(vars.$colors,primary) inset;
+    }
+    &.is-hover{
+      box-shadow:  0 0 0 1px map.get(vars.$colors,neutral-7) inset;
+    }
+  }
+}
+
+@mixin resetButton(
+  $type: primary,
+) {
+  border-radius: 0.5rem;
+  background-color: map.get(vars.$colors, $type);
+  &:hover{
+    background-color: map.get(vars.$colors, #{$type}-dark-1);
+  }
+}
+
+@mixin resetSelect() {
+  border-color: map.get(vars.$colors, neutral-7);
+  border-radius: 0.5rem;
+  .el-select__wrapper{
+    &.is-hovering{
+      border-color: map.get(vars.$colors, neutral-5);
+    }
+    &.is-focused{
+      border-color: map.get(vars.$colors, primary);
+      box-shadow: 0 0 0 1px map.get(vars.$colors, primary) inset;
+    }
+  }
+}
