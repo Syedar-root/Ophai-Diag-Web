@@ -3,7 +3,8 @@ import {ref} from "vue";
 
 export const  useUserStore = defineStore("user", ()=>{
     const user = ref({
-        username: null,
+        id: null,
+		userName: null,
     });
 
 	// 测试

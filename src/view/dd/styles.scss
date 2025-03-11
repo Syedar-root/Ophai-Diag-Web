@@ -262,7 +262,7 @@ $severity:(
   align-items: center;
   $gap: map.get(vars.$space,l);
   gap: $gap;
-  $padding: map.get(vars.$space,s);
+  $padding: map.get(vars.$space,xxl);
   padding: $padding;
 
   .image-view{

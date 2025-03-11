@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "axios": "^1.8.1",
     "element-plus": "^2.9.5",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
@@ -23,9 +22,11 @@
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.2.2",
+    "@types/joi": "^17.2.2",
     "@types/node": "^22.13.7",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "joi": "^17.13.3",
     "typescript": "~5.7.2",
     "unplugin-auto-import": "^19.1.1",
     "unplugin-vue-components": "^28.4.1",

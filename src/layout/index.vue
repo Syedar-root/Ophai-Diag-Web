@@ -26,7 +26,7 @@ const handleLoginShow = () => {
 }
 
 const handleContainerClick = () => { // 定义具名函数
-  if (!userStore.user?.username) {
+  if (!userStore.user?.id) {
     handleLoginShow();
   }
 };
@@ -36,7 +36,8 @@ const userStore = useUserStore();
 
 onMounted(()=>{
   // 初始化时根据用户状态添加监听
-  if (!userStore.user?.username) {
+  console.log(userStore.user)
+  if (!userStore.user?.id) {
     layoutContainer.value?.addEventListener('click', handleContainerClick);
   }
 })
@@ -49,7 +50,7 @@ onBeforeUnmount(() => {
 watch(
     () => userStore.user,
     (newUser) => {
-      if (newUser?.username) {
+      if (newUser?.id) {
         layoutContainer.value?.removeEventListener('click', handleContainerClick);
       } else {
         layoutContainer.value?.addEventListener('click', handleContainerClick);
@@ -69,7 +70,7 @@ watch(
 .layout__header {
     width: 100%;
     height: clamp(43px, 5vh, 64px);
-    min-height: 43px;
+    min-height: 50px;
     border-bottom: 1px solid #ccc;
 }
 

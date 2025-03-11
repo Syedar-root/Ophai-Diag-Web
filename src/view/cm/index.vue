@@ -69,6 +69,7 @@ const tableData = [
   {caseId: '123456', patientId: '123456', patientName: '张三', age: '20', gender: '男', diagnosisStatus: '未诊断', updateTime: '2021-01-01'},
   {caseId: '123456', patientId: '123456', patientName: '张三', age: '20', gender: '男', diagnosisStatus: '未诊断', updateTime: '2021-01-01'},
 ]
+
 </script>
 
 <style scoped lang="scss">
