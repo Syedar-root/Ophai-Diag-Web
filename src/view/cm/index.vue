@@ -6,7 +6,7 @@
           <el-input v-model="input" placeholder="请输入要查询的内容" :prefix-icon="Search" clearable></el-input>
         </el-col>
         <el-col :span="3">
-          <el-button @click="search" type="primary" :icon="Plus">新增病例</el-button>
+          <el-button @click="search" type="primary" :icon="CirclePlus">新增病例</el-button>
         </el-col>
       </el-row>
       <el-row class="header-select-row" :gutter="10">
@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import {Plus, Search, View, Edit, Delete} from "@element-plus/icons-vue";
+import {Plus, Search, View, Edit, Delete, CirclePlus} from "@element-plus/icons-vue";
 
 const tableData = [
   {caseId: '123456', patientId: '123456', patientName: '张三', age: '20', gender: '男', diagnosisStatus: '未诊断', updateTime: '2021-01-01'},

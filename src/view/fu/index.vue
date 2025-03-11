@@ -11,7 +11,7 @@
               <div class="upload--text">图片拖拽到此处或单击此处</div>
               <template #tip>
                 <div class="upload--tip">
-                  仅支持jpg格式
+                  仅支持jpg格式。图片命名需要以"_left"或"_right"来区分左右眼
                 </div>
               </template>
             </el-upload>

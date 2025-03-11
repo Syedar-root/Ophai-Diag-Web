@@ -20,6 +20,12 @@
   flex-grow: 1;
   height: 100%;
   @include flex-center();
+
+  .nav-logo{
+    position: relative;
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+  }
 }
 
 // tab area

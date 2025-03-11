@@ -2,15 +2,11 @@
 @use "./vars.scss" as vars;
 
 @mixin resetInput() {
-  :deep(.el-input__wrapper){
-    border-radius: 0.5rem;
-    &.is-focus{
-      box-shadow:  0 0 0 1px map.get(vars.$colors,primary) inset;
-    }
-    &.is-hover{
-      box-shadow:  0 0 0 1px map.get(vars.$colors,neutral-7) inset;
-    }
-  }
+  --el-input-border-color: #{map.get(vars.$colors, neutral-7)};
+  --el-input-hover-border-color: #{map.get(vars.$colors, neutral-5)};
+  --el-input-focus-border-color: #{map.get(vars.$colors, primary)};
+  --el-input-disabled-border-color: #{map.get(vars.$colors, neutral-2)};
+  --el-input-disabled-background-color: #{map.get(vars.$colors, neutral-1)};
 }
 
 @mixin resetButton(

@@ -4,7 +4,7 @@
 <template>
   <div class="nav-container">
     <div class="nav__logo-area">
-      Logo
+      <img class="nav-logo" src="@/assets/logo/logo.svg" alt="logo" />
     </div>
     <div class="nav__tab-area">
       <div class="tab-item"

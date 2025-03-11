@@ -1,0 +1,433 @@
+@use "sass:map";
+@use "@/assets/styles/vars" as vars;
+@use "@/assets/styles/resetElement" as resetElement;
+
+$severity:(
+        slight:map.get(vars.$colors,success),
+        moderate:map.get(vars.$colors,warning),
+        severe:map.get(vars.$colors,danger),
+);
+@mixin left-area{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  .title{
+    width: 100%;
+    text-align: start;
+    font-size: map.get(vars.$font-size,l);
+    font-weight: bold;
+    margin-bottom: map.get(vars.$space,m);
+  }
+}
+@mixin point{
+  position: relative;
+  width: 0.5rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin-right: map.get(vars.$space,s);
+
+  @each $key,$value in $severity{
+    &.is-#{$key}{
+      background-color: $value;
+    }
+  }
+}
+@mixin card{
+  border: 1px solid map.get(vars.$colors,neutral-9);
+  border-radius: 0.5rem;
+  padding: map.get(vars.$space,s);
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+}
+
+.dd-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  $padding: map.get(vars.$space,m);
+  padding: $padding;
+  background-color: map.get(vars.$colors,_white);
+}
+
+.dd-container__left,
+.dd-container__right {
+  width: 20%;
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  flex-shrink: 0;
+}
+.dd-container__center {
+  position: relative;
+  flex-grow: 2;
+  height: 100%;
+  flex-shrink: 0;
+  width: 60%;
+}
+
+.dd-container__left{
+  $padding: map.get(vars.$space,s);
+  padding: $padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: map.get(vars.$space,s);
+  border-right: 1px solid map.get(vars.$colors,neutral-7);
+}
+
+.patient-info-area{
+  @include left-area;
+  .patient-info-area__content{
+    width: 100%;
+    height: auto;
+    @include card;
+
+    .base-info{
+      width: 100%;
+      .base-info-item{
+        align-self: start;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        label{
+          width: 100%;
+          text-align: start;
+          font-size: map.get(vars.$font-size,s);
+          color: map.get(vars.$colors,neutral-3);
+          margin-bottom: map.get(vars.$space,xxxs);
+        }
+        span{
+          width: 100%;
+          text-align: start;
+          font-size: map.get(vars.$font-size,m);
+          font-weight: 600;
+          color: map.get(vars.$colors,neutral-1);
+          margin-bottom: map.get(vars.$space,s);
+        }
+      }
+    }
+
+    hr{
+      width: 100%;
+      $color: map.get(vars.$colors,neutral-9);
+      color: $color;
+      background-color: $color;
+      border-color: $color;
+    }
+
+    .history-case{
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      $padding: map.get(vars.$space,s);
+      padding: $padding;
+      .title{
+        width: 100%;
+        height: auto;
+        margin: 0;
+        text-align: start;
+        font-size: map.get(vars.$font-size,m);
+      }
+      .history-case__content{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        $gap: map.get(vars.$space,s);
+        gap: $gap;
+
+        .history-case__item{
+          position: relative;
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: center;
+
+
+          .point{
+            @include point;
+          }
+          .info{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            .date{
+              width: 100%;
+              text-align: start;
+              font-size: map.get(vars.$font-size,m);
+              font-weight: 600;
+            }
+            .description{
+              width: 100%;
+              text-align: start;
+              font-size: map.get(vars.$font-size,s);
+              color: map.get(vars.$colors,neutral-3);
+              margin-top: map.get(vars.$space,xxxs);
+            }
+          }
+          .el-icon{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.image-info-area{
+ @include left-area;
+  .image-content{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    @include card;
+
+    .image-item{
+      position: relative;
+      width: 40%;
+      aspect-ratio: 1/1;
+
+      img{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+
+.dd-container__center{
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+
+    &-track {
+      background-color: transparent;
+      border-radius: 4px;
+    }
+
+    &-thumb {
+      background-color: transparent;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+  }
+  &:hover {
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      background-color: transparent;
+
+      &-track {
+        background-color: map.get(vars.$colors, neutral-9);
+        border-radius: 4px;
+      }
+
+      &-thumb {
+        background-color: map.get(vars.$colors, neutral-6);
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.dd-container__center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  $gap: map.get(vars.$space,l);
+  gap: $gap;
+  $padding: map.get(vars.$space,s);
+  padding: $padding;
+
+  .image-view{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+
+    .img{
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+    }
+  }
+
+  .ai-diag-area{
+    width: 90%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    $padding: 10%;
+    padding: 0 $padding 0 $padding;
+
+    .title{
+      margin-left: 5%;
+      font-size: map.get(vars.$font-size,m);
+      font-weight: 600;
+      margin-bottom: map.get(vars.$space,m);
+    }
+    .ai-diag-area__content{
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-around;
+
+      .diag{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: map.get(vars.$space,m);
+
+       .diag-item{
+          position: relative;
+          width: 85%;
+          height: 85%;
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          align-items: start;
+          @include card;
+
+         .title{
+            width: 100%;
+            font-size: map.get(vars.$font-size,m);
+            font-weight: 500;
+            text-align: start;
+            margin-bottom: map.get(vars.$space,xxs);
+            border-bottom: 1px solid map.get(vars.$colors,neutral-9);
+          }
+
+         .find-item{
+           width: 100%;
+           display: flex;
+           justify-content: start;
+           align-items: center;
+           $padding: map.get(vars.$space,s);
+           padding: 0 $padding 0 $padding;
+           margin-bottom: map.get(vars.$space,xs);
+           .point{
+             @include point;
+             flex-shrink: 0;
+           }
+          .info{
+            text-align: start;
+            text-wrap: wrap;
+          }
+         }
+
+
+       }
+      }
+      .chart{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.dd-container__right{
+  $padding: map.get(vars.$space,s);
+  padding: $padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  .title{
+    width: 100%;
+    text-align: start;
+    font-size: map.get(vars.$font-size,l);
+    font-weight: 600;
+    margin-bottom: map.get(vars.$space,m);
+  }
+  .report-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: map.get(vars.$space,s);
+
+    .report-item{
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      @include card;
+      .report-item__title{
+        width: 100%;
+        min-height: 3rem;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        font-size: map.get(vars.$font-size,m);
+        font-weight: 500;
+        border-bottom: 1px solid map.get(vars.$colors,neutral-9);
+        margin-bottom: map.get(vars.$space,s);
+      }
+     .report-item__content{
+       width: 100%;
+       text-align: start;
+       font-size: map.get(vars.$font-size,s);
+       label{
+         color: map.get(vars.$colors,neutral-3);
+       }
+       span{
+         color: map.get(vars.$colors,neutral-1);
+       }
+     }
+    }
+    .report-opt{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .save{
+        @include resetElement.resetButton();
+      }
+      .export{
+        @include resetElement.resetButton($type:"info");
+      }
+
+    }
+  }
+}
