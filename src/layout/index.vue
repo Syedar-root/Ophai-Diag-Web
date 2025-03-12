@@ -37,6 +37,8 @@ const userStore = useUserStore();
 onMounted(()=>{
   // 初始化时根据用户状态添加监听
   console.log(userStore.user)
+  // console.log(import.meta.env.MODE)
+  // console.log(import.meta.env.VITE_API_BASE_URL)
   if (!userStore.user?.id) {
     layoutContainer.value?.addEventListener('click', handleContainerClick);
   }
@@ -61,6 +63,7 @@ watch(
 
 <style scoped>
 .layout-container {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -68,13 +71,15 @@ watch(
 }
 
 .layout__header {
+    position: relative;
     width: 100%;
-    height: clamp(43px, 5vh, 64px);
-    min-height: 50px;
+    height: clamp(64px, 5vh, 104px);
+    min-height: 64px;
     border-bottom: 1px solid #ccc;
 }
 
 .layout__main {
+    position: relative;
     width: 100%;
     flex-grow: 1;
     max-height: 99%;

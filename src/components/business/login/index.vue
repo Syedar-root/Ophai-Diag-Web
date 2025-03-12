@@ -3,28 +3,33 @@ import { ref } from 'vue'
 import {Key, User} from "@element-plus/icons-vue";
 import logo from '@/assets/logo/logo.svg'
 import type {userDto} from "@/components/business/login/types.ts";
-import {loginService} from "@/api/login/index.ts";
-import { validate,loginSchema } from "@/util/validate";
+import { loginService, registerService } from '@/api/login/index.ts'
+import { validate,loginSchema,registerSchema } from "@/util/validate";
 import {useUserStore} from "@/store/user";
 
 const userStore = useUserStore();
 
 const query = ref<userDto>({
-  id: null,
-  passwordHash: null,
+  id: "",
+  passwordHash: "",
 })
-const registerQuery = ref({
-  name:'',
-  gender:'',
-  phone:'',
-  idCard:'',
-  proDoctorId:'',
-  hospital:'',
-  department:'',
-  position:'',
-  password:'',
-  confirmPassword:''
+const registerQuery = ref<userDto>({
+  userName: '',
+  passwordHash: '',
+  confirmPasswordHash: '',
+  email: '',
+  gender: '', // 性别改为空字符串
+  phone: '',  // 手机号改为空字符串
+  realName: '',
+  age: null,  // 数值类型可以保持 null
+  hospital: '',
+  department: '',
+  position: '',
+  idCard: '',
+  proDoctorId:''
 })
+
+// 登录流程
 const handleLogin = async () => {
   try {
     //   验证参数
@@ -42,6 +47,23 @@ const handleLogin = async () => {
     return;
   }
 }
+
+// 注册流程
+const handleRegister = async() => {
+  try {
+    //   验证参数
+    await validate(registerQuery.value,registerSchema);
+    //   注册
+    await registerService(registerQuery.value).then((data: any)=>{
+      console.log(data);
+    });
+  }catch(error){
+    console.error(error);
+    return;
+  }
+}
+
+// 控制登录注册显示
 const loginContainer = ref<HTMLDivElement>();
 const emit = defineEmits(['containerClick'])
 const containerClick = () => {
@@ -107,14 +129,14 @@ function handleRegisterShow() {
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item prop="username" label="姓名" label-position="top">
-                  <el-input placeholder="请输入真实姓名" v-model="registerQuery.name"></el-input>
+                  <el-input placeholder="请输入真实姓名" v-model="registerQuery.userName"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item prop="gender" label="性别" label-position="top">
                   <el-radio-group v-model="registerQuery.gender" label="性别" label-position="top" >
-                    <el-radio value="male" size="large">男</el-radio>
-                    <el-radio value="female" size="large">女</el-radio>
+                    <el-radio value="0" size="large">男</el-radio>
+                    <el-radio value="1" size="large">女</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-col>
@@ -158,17 +180,17 @@ function handleRegisterShow() {
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item prop="password" label="密码" label-position="top">
-                  <el-input placeholder="请输入密码" v-model="registerQuery.password" type="password" show-password></el-input>
+                  <el-input placeholder="请输入密码" v-model="registerQuery.passwordHash" type="password" show-password></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item prop="confirmPassword" label="确认密码" label-position="top">
-                  <el-input placeholder="请确认密码" v-model="registerQuery.confirmPassword" type="password" show-password></el-input>
+                  <el-input placeholder="请确认密码" v-model="registerQuery.confirmPasswordHash" type="password" show-password></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-form-item>
-              <el-button type="primary" >注册</el-button>
+              <el-button type="primary" @click="handleRegister" >注册</el-button>
             </el-form-item>
           </el-form>
         </div >

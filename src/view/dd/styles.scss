@@ -65,7 +65,8 @@ $severity:(
 .dd-container__center {
   position: relative;
   flex-grow: 2;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   flex-shrink: 0;
   width: 60%;
 }
@@ -106,11 +107,15 @@ $severity:(
         }
         span{
           width: 100%;
+          height: auto;
           text-align: start;
           font-size: map.get(vars.$font-size,m);
           font-weight: 600;
           color: map.get(vars.$colors,neutral-1);
           margin-bottom: map.get(vars.$space,s);
+          overflow-wrap: break-word;  // 允许在任意字符间断行
+          word-break: break-all;     // 允许在单词内断行
+          white-space: normal;
         }
       }
     }
@@ -205,6 +210,15 @@ $severity:(
       position: relative;
       width: 40%;
       aspect-ratio: 1/1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      &.active {
+        box-shadow: 0 0 10px rgba(map.get(vars.$colors, 'primary'), 0.9);
+        transform: scale(0.95);
+      }
 
       img{
         position: relative;
@@ -262,30 +276,48 @@ $severity:(
   align-items: center;
   $gap: map.get(vars.$space,l);
   gap: $gap;
-  $padding: map.get(vars.$space,xxl);
+  $padding: map.get(vars.$space,m);
   padding: $padding;
 
+
   .image-view{
-    width: auto;
+    position: relative;
+    width: 90%;
     height: auto;
     max-width: 100%;
-    aspect-ratio: 1/1;
-
+    //aspect-ratio: 1/1;
+    object-fit: contain;
+    background-color: map.get(vars.$colors,neutral-9);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .image-view__opt{
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: map.get(vars.$space,xs);
+    }
     .img{
-      width: 100%;
+      width: 70%;
       aspect-ratio: 1/1;
       object-fit: contain;
     }
   }
 
   .ai-diag-area{
-    width: 90%;
+    width: 100%;
     flex-grow: 1;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: start;
-    $padding: 10%;
-    padding: 0 $padding 0 $padding;
+    $padding: map.get(vars.$space,xxxl);
+    padding: $padding;
 
     .title{
       margin-left: 5%;
@@ -320,11 +352,12 @@ $severity:(
           @include card;
 
          .title{
+            position: relative;
             width: 100%;
             font-size: map.get(vars.$font-size,m);
             font-weight: 500;
             text-align: start;
-            margin-bottom: map.get(vars.$space,xxs);
+            margin: 0 0 map.get(vars.$space, xxs) 0;
             border-bottom: 1px solid map.get(vars.$colors,neutral-9);
           }
 

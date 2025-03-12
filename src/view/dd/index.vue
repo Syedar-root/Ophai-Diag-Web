@@ -58,19 +58,35 @@
       <div class="image-info-area">
         <span class="title">影像信息</span>
         <div class="image-content">
-          <div class="image-item">
+          <div class="image-item" @click="handleImgChange(0)"
+               :class="{ 'active': currentImgIndex === 0 }">
             <img :src="imgUrl[0]" alt="left">
           </div>
-          <div class="image-item">
+          <div class="image-item" @click="handleImgChange(1)"
+               :class="{ 'active': currentImgIndex === 1 }">
             <img :src="imgUrl[1]" alt="right">
           </div>
         </div>
       </div>
     </div>
 
-      <div class="dd-container__center">
+    <div class="dd-container__center">
         <div class="image-view">
-          <img class="img" :src="imgUrl[0]" alt="left">
+          <div class="image-view__opt">
+            <div class="opt-item">
+              <el-button type="primary">放大</el-button>
+            </div>
+            <div class="opt-item">
+              <el-button type="primary">缩小</el-button>
+            </div>
+            <div class="opt-item">
+              <el-button type="primary">旋转</el-button>
+            </div>
+            <div class="opt-item">
+              <el-button type="primary">翻转</el-button>
+            </div>
+          </div>
+          <img class="img" :src="imgUrl[currentImgIndex]" alt="center">
         </div>
         <div class="ai-diag-area">
           <span class="title">AI诊断</span>
@@ -181,6 +197,11 @@ const actionList = ref([
 ])
 
 const imgUrl = ref([leftImg,rightImg])
+const currentImgIndex = ref(0);
+function handleImgChange(index:number) {
+  currentImgIndex.value = index;
+}
+
 </script>
 
 <style scoped lang="scss">
