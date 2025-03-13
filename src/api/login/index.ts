@@ -3,8 +3,8 @@ import type {CustomAxiosRequestConfig} from "@/util/request";
 
 export const loginService = (query: any) => {
   return request({
-        url: "/login",
-        method: "post",
+        url: "/user/login",
+        method: "get",
         data: query,
         noToken: true,
   } as CustomAxiosRequestConfig);
@@ -12,7 +12,7 @@ export const loginService = (query: any) => {
 
 export const registerService = (query: any) => {
   return request({
-        url: "/register",
+        url: "/user/register",
         method: "post",
         data: query,
         noToken: true,

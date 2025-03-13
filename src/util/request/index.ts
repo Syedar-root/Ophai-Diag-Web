@@ -10,7 +10,7 @@ interface ResponseData<T = any> {
 
 const request: AxiosInstance = axios.create(
     {
-      baseURL: import.meta.env.API_BASE_URL,
+      baseURL: import.meta.env.VITE_API_BASE_URL,
       timeout: 5000
 }) ;
 
@@ -34,10 +34,10 @@ request.interceptors.request.use(
       }
       if (config.method === 'get') {
           config.params = config.params || {};
-          config.params.t = Date.now();
+          // config.params.t = Date.now();
       }else if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
           config.data = config.data || {};
-          config.data.t = Date.now();
+          // config.data.t = Date.now();
       }
     return config;
   },
@@ -59,12 +59,13 @@ request.interceptors.response.use(
         return Promise.reject(response.data.data);
       }else{
         // 在这里可以对响应数据进行处理
+          console.log(response.data.data);
           ElMessage({
               message: response.data.message,
               type: 'success',
               duration: 2000
           })
-          return Promise.reject(response.data.data);
+          return Promise.resolve(response.data.data);
       }
     }else if (response.status === 500){
         ElMessage({

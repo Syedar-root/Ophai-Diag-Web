@@ -10,7 +10,7 @@
         </div>
     </div>
   <transition name="fade">
-    <Login v-show="false" @containerClick="handleLoginShow" @click.stop></Login>
+    <Login v-show="loginShow" @containerClick="handleLoginShow" @click.stop></Login>
   </transition>
 </template>
 <script setup lang="ts">
@@ -18,6 +18,7 @@ import Nav from "../components/business/nav/index.vue";
 import Login from "../components/business/login/index.vue";
 import { ref } from 'vue'
 import {useUserStore} from "@/store/user";
+import {useTokenStore} from "@/store/token";
 
 const layoutContainer = ref();
 const loginShow = ref<boolean>(false);
@@ -32,6 +33,7 @@ const handleContainerClick = () => { // 定义具名函数
 };
 
 const userStore = useUserStore();
+const tokenStore = useTokenStore();
 
 
 onMounted(()=>{
@@ -39,21 +41,23 @@ onMounted(()=>{
   console.log(userStore.user)
   // console.log(import.meta.env.MODE)
   // console.log(import.meta.env.VITE_API_BASE_URL)
-  if (!userStore.user?.id) {
+  if (tokenStore.isTokenExpired()) {
     layoutContainer.value?.addEventListener('click', handleContainerClick);
   }
 })
 
 onBeforeUnmount(() => {
   layoutContainer.value?.removeEventListener('click', handleContainerClick);
+  loginShow.value = false;
 });
 
 // 监听用户状态变化
 watch(
-    () => userStore.user,
-    (newUser) => {
-      if (newUser?.id) {
+    () => tokenStore.expire,
+    () => {
+      if (!tokenStore.isTokenExpired()) {
         layoutContainer.value?.removeEventListener('click', handleContainerClick);
+        loginShow.value = false;
       } else {
         layoutContainer.value?.addEventListener('click', handleContainerClick);
       }

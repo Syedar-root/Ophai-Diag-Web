@@ -6,8 +6,10 @@ import type {userDto} from "@/components/business/login/types.ts";
 import { loginService, registerService } from '@/api/login/index.ts'
 import { validate,loginSchema,registerSchema } from "@/util/validate";
 import {useUserStore} from "@/store/user";
+import {useTokenStore} from "@/store/token";
 
 const userStore = useUserStore();
+const tokenStore = useTokenStore();
 
 const query = ref<userDto>({
   id: "",
@@ -37,10 +39,7 @@ const handleLogin = async () => {
     //   登录
     await loginService(query.value).then((data: any)=>{
       console.log(data);
-      userStore.setUser({
-        id:data.id,
-        userName:data.userName,
-      })
+      tokenStore.setToken(data.token);
     });
   } catch (error) {
     console.error(error);
@@ -56,6 +55,8 @@ const handleRegister = async() => {
     //   注册
     await registerService(registerQuery.value).then((data: any)=>{
       console.log(data);
+      registerShow.value = false;
+      loginShow.value = true;
     });
   }catch(error){
     console.error(error);
@@ -150,6 +151,13 @@ function handleRegisterShow() {
               <el-col :span="12">
                 <el-form-item prop="idCard" label="身份证号" label-position="top">
                   <el-input placeholder="请输入身份证号" v-model="registerQuery.idCard"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col>
+                <el-form-item prop="proDoctorId" label="邮箱" label-position="top">
+                  <el-input placeholder="请输入邮箱" v-model="registerQuery.email"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>

@@ -11,8 +11,9 @@ export const validate = async (values: any, schema: Joi.Schema) => {
     if (error instanceof Joi.ValidationError) {
       // 拼接错误信息
       const errorMessages = error.details.map(detail => {
-        return `${detail.context?.label || '字段'}：${detail.message}`
-      }).join('\n');
+        // return `${detail.context?.label || '字段'}：${detail.message}`
+        return `${detail.message}`
+      }).join('；\n');
 
       ElMessage({
         message: `验证失败：\n${errorMessages}`,

@@ -1,4 +1,5 @@
 @use "@/assets/styles/vars.scss" as vars;
+@use '@/assets/styles/resetElement.scss' as resetElement;
 
 // 组件样式变量定义
 $container-clr--bg: map-get(vars.$colors,neutral-1);
@@ -11,7 +12,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   width: 100%;
   height: 100%;
   display: flex;
-  z-index: 9999;
+  z-index: 999;
   justify-content: center;
   align-items: center;
   background-color: rgba($container-clr--bg, 0.5);
@@ -72,7 +73,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
 }
 
 .login-content__title{
-  color: map-get(vars.$colors,neutral-2);
+  //color: map-get(vars.$colors,neutral-2);
   width: 100%;
   height: 10%;
   color: $title-clr--text;
@@ -105,12 +106,6 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
         height: clamp(1.5rem, 2.5rem, 3rem);
         .el-input__wrapper{
           border-radius: 0.5rem;
-          &.is-focus{
-            box-shadow:  0 0 0 1px map-get(vars.$colors,primary) inset;
-          }
-          &.is-hover{
-            box-shadow:  0 0 0 1px map-get(vars.$colors,neutral-7) inset;
-          }
         }
         .el-icon{
           font-size: 1rem;
@@ -123,26 +118,13 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
-        background-color: map-get(vars.$colors,primary);
-        &:hover{
-          background-color: map-get(vars.$colors,primary-dark-1);
-        }
+        //background-color: map-get(vars.$colors,primary);
+        @include resetElement.resetButton();
       }
 
-      .el-checkbox{
-        &.is-checked {
-          .el-checkbox__inner{
-            background-color: map-get(vars.$colors,primary);
-            border-color: map-get(vars.$colors,primary);
-          }
-          .el-checkbox__label{
-            color: map-get(vars.$colors,primary);
-          }
-        }
-      }
 
       .el-link{
-        color: map-get(vars.$colors,primary);
+        //color: map-get(vars.$colors,primary);
         &:after{
           border: 0;
         }
@@ -178,11 +160,13 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
 
 .register-content{
   width: 40%;
-  height: 60%;
+  height: auto;
   min-width: 24rem;
-  min-height: 40rem;
+  min-height: 60%;
+  max-height: 80%;
   @include base-content;
   gap: 0;
+  overflow: auto;
 }
 
 .register-content__title{
@@ -215,38 +199,20 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
         width: 100%;
         margin-bottom: 0;
       }
-      .el-radio{
-        &.is-checked{
-          .el-radio__input .el-radio__inner{
-            background-color: map-get(vars.$colors,primary);
-            border-color: map-get(vars.$colors,primary);
-          }
-         .el-radio__label{
-           color: map-get(vars.$colors,primary);
-         }
-        }
-      }
+
       .el-input{
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         .el-input__wrapper{
           border-radius: 0.5rem;
-          &.is-focus{
-            box-shadow:  0 0 0 1px map-get(vars.$colors,primary) inset;
-          }
-          &.is-hover{
-            box-shadow:  0 0 0 1px map-get(vars.$colors,neutral-7) inset;
-          }
         }
       }
       .el-button{
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
-        background-color: map-get(vars.$colors,primary);
-        &:hover{
-          background-color: map-get(vars.$colors,primary-dark-1);
-        }
+        //background-color: map-get(vars.$colors,primary);
+        @include resetElement.resetButton();
       }
     }
   }

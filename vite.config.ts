@@ -49,7 +49,7 @@ export default defineConfig({
         }),
         // Auto register Element Plus components
         // 自动导入 Element Plus 组件
-        ElementPlusResolver(),
+        ElementPlusResolver({importStyle: 'sass'}),
       ],
 
       dts: path.resolve(pathSrc, 'components.d.ts'),
@@ -61,4 +61,12 @@ export default defineConfig({
 
     Inspect(),
   ],
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/element-vars.scss" as *;`,
+      },
+    },
+  }
 })

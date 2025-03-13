@@ -21,12 +21,15 @@ $MaxStep: 9;
 }
 
 // 添加 _white 和 _black
-$colors: map.merge($colors, (_white: #fafafa));
-$colors: map.merge($colors, (_black: #222222));
+$_white: color.mix(#fff, map.get($colors, primary), 99%);
+$_black: color.mix(#000, map.get($colors, primary), 99%);
+$colors: map.merge($colors, (_white: $_white));
+$colors: map.merge($colors, (_black: $_black));
 
 // 生成中性色
-@for $i from 1 through 9 {
-    $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i * 10%));
+$MaxStep: 15;
+@for $i from 1 through $MaxStep {
+    $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i / ($MaxStep + 1)) * 100%);
     $colors: map.merge($colors, (neutral-#{$i}: $neutral));
 }
 
