@@ -1,24 +1,27 @@
 <script setup lang="ts">
+  // 新增路由导入
+  import { useRoute } from 'vue-router'
+  const route = useRoute()
 </script>
 
 <template>
   <div class="nav-container">
     <div class="nav__logo-area">
-      <img class="nav-logo" src="@/assets/logo/logo.svg" alt="logo" />
+      <img class="nav-logo" src="@/assets/logo/logo1.svg" alt="logo" />
     </div>
     <div class="nav__tab-area">
       <div class="tab-item"
-           :class="{active : $route.path === '/fu'}"
+           :class="{active : route.path === '/fu'}"
            v-route=" '/fu'">
         <span>快速导入</span>
       </div>
       <div class="tab-item"
-           :class="{active : $route.path === '/dd'}"
+           :class="{active : route.path === '/dd'}"
            v-route=" '/dd'">
         <span>诊断分析</span>
       </div>
       <div class="tab-item"
-           :class="{active : $route.path === '/cm'}"
+           :class="{active : route.path === '/cm'}"
            v-route=" '/cm'">
         <span>病例管理</span>
       </div>

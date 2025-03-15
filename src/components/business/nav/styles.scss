@@ -17,14 +17,17 @@
 // logo area
 .nav__logo-area {
   position: relative;
-  flex-grow: 1;
+  //flex-grow: 1;
+  width: clamp(150px, 10%, 200px);
   height: 100%;
   @include flex-center();
+  justify-content: start;
+  margin-right: 3rem;
+  margin-left: 1rem;
 
   .nav-logo{
     position: relative;
-    margin-right: 1rem;
-    margin-left: 0.5rem;
+    width: 100%;
   }
 }
 

@@ -10,7 +10,7 @@
         </div>
     </div>
   <transition name="fade">
-    <Login v-show="loginShow" @containerClick="handleLoginShow" @click.stop></Login>
+    <Login v-show="false" @containerClick="handleLoginShow" @click.stop></Login>
   </transition>
 </template>
 <script setup lang="ts">
