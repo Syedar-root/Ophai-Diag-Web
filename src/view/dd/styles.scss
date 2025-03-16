@@ -37,7 +37,7 @@ $severity:(
   }
 }
 @mixin card{
-  border: 1px solid map.get(vars.$colors,neutral-9);
+  border: 1px solid map.get(vars.$colors,neutral-14);
   border-radius: 0.5rem;
   padding: map.get(vars.$space,s);
   background-color: #fff;
@@ -122,7 +122,7 @@ $severity:(
 
     hr{
       width: 100%;
-      $color: map.get(vars.$colors,neutral-9);
+      $color: map.get(vars.$colors,neutral-14);
       color: $color;
       background-color: $color;
       border-color: $color;
@@ -256,12 +256,12 @@ $severity:(
       background-color: transparent;
 
       &-track {
-        background-color: map.get(vars.$colors, neutral-9);
+        background-color: map.get(vars.$colors, neutral-14);
         border-radius: 4px;
       }
 
       &-thumb {
-        background-color: map.get(vars.$colors, neutral-6);
+        background-color: map.get(vars.$colors, neutral-12);
         border-radius: 4px;
         transition: background-color 0.3s;
         opacity: 0;
@@ -287,7 +287,7 @@ $severity:(
     max-width: 100%;
     //aspect-ratio: 1/1;
     object-fit: contain;
-    background-color: map.get(vars.$colors,neutral-9);
+    background-color: map.get(vars.$colors,neutral-14);
     border-radius: 0.5rem;
     display: flex;
     justify-content: center;
@@ -358,7 +358,7 @@ $severity:(
             font-weight: 500;
             text-align: start;
             margin: 0 0 map.get(vars.$space, xxs) 0;
-            border-bottom: 1px solid map.get(vars.$colors,neutral-9);
+            border-bottom: 1px solid map.get(vars.$colors,neutral-14);
           }
 
          .find-item{
@@ -433,7 +433,7 @@ $severity:(
         align-items: center;
         font-size: map.get(vars.$font-size,m);
         font-weight: 500;
-        border-bottom: 1px solid map.get(vars.$colors,neutral-9);
+        border-bottom: 1px solid map.get(vars.$colors,neutral-14);
         margin-bottom: map.get(vars.$space,s);
       }
      .report-item__content{
