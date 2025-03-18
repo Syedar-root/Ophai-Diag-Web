@@ -1,58 +1,68 @@
-@use "sass:map";
-@use "sass:color";
+@use 'sass:map';
+@use 'sass:color';
 $colors: (
-    primary: #3ea2e4,
-    success: #43cd88,
-    info: #bebebe,
-    warning: #ffb15f,
-    danger: #f74047,
+  primary: #3ea2e4,
+  success: #43cd88,
+  info: #bebebe,
+  warning: #ffb15f,
+  danger: #f74047
 );
 
 $MaxStep: 9;
 // 生成浅色和深色变体
 @each $key, $value in $colors {
-    @for $i from 1 through $MaxStep {
-        $light: color.mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
-        $colors: map.merge($colors, (#{$key}-light-#{$i}: $light));
-        
-        $dark: color.mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
-        $colors: map.merge($colors, (#{$key}-dark-#{$i}: $dark));
-    }
+  @for $i from 1 through $MaxStep {
+    $light: color.mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
+    $colors: map.merge($colors, (#{$key}-light-#{$i}: $light));
+
+    $dark: color.mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
+    $colors: map.merge($colors, (#{$key}-dark-#{$i}: $dark));
+  }
 }
 
 // 添加 _white 和 _black
 $_white: color.mix(#fff, map.get($colors, primary), 99%);
 $_black: color.mix(#000, map.get($colors, primary), 99%);
-$colors: map.merge($colors, (_white: $_white));
-$colors: map.merge($colors, (_black: $_black));
+$colors: map.merge(
+  $colors,
+  (
+    _white: $_white
+  )
+);
+$colors: map.merge(
+  $colors,
+  (
+    _black: $_black
+  )
+);
 
 // 生成中性色
 $MaxStep: 15;
 @for $i from 1 through $MaxStep {
-    $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i / ($MaxStep + 1)) * 100%);
-    $colors: map.merge($colors, (neutral-#{$i}: $neutral));
+  $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i / ($MaxStep + 1)) * 100%);
+  $colors: map.merge($colors, (neutral-#{$i}: $neutral));
 }
 
-$font-size:(
-        xxs: 0.4rem,
-        xs: 0.6rem,
-        s: 0.8rem,
-        m: 1rem,
-        l: 1.25rem,
-        xl: 1.5rem,
-        xxl: 1.75rem,
-        xxxl: 2rem,
-        xxxxl: 2.25rem
+$font-size: (
+  xxs: 0.4rem,
+  xs: 0.6rem,
+  s: 0.8rem,
+  m: 1rem,
+  l: 1.25rem,
+  xl: 1.5rem,
+  xxl: 1.75rem,
+  xxxl: 2rem,
+  xxxxl: 2.25rem
 );
 
-$space:(
-        xxs: 0.25rem,
-        xs: 0.5rem,
-        s: 0.75rem,
-        m: 1rem,
-        l: 1.25rem,
-        xl: 1.5rem,
-        xxl: 1.75rem,
-        xxxl: 2rem,
-        xxxxl: 2.25rem
+$space: (
+  xxs: 0.25rem,
+  xs: 0.5rem,
+  s: 0.75rem,
+  m: 1rem,
+  l: 1.25rem,
+  xl: 1.5rem,
+  xxl: 1.75rem,
+  xxxl: 2rem,
+  xxxxl: 2.25rem
 );

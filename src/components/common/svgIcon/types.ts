@@ -1,6 +1,7 @@
 export interface svgIconProps {
-    name?: string;
-    size?: number;
-    color?: string;
-    className?: string;
+  name?: string
+  icon?: string | Component
+  size?: number
+  color?: string
+  className?: string
 }

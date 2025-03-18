@@ -1,102 +1,100 @@
 <template>
-    <div class="layout-container" ref="layoutContainer">
-        <div class="layout__header">
-          <Nav></Nav>
-        </div>
-        <div class="layout__main">
-          <transition name="fade">
-            <router-view></router-view>
-          </transition>
-        </div>
+  <div class="layout-container" ref="layoutContainer">
+    <div class="layout__header">
+      <Nav></Nav>
     </div>
-  <transition name="fade">
-    <Login v-show="false" @containerClick="handleLoginShow" @click.stop></Login>
-  </transition>
+    <div class="layout__main">
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
+    <transition name="fade">
+      <Login v-show="false" @containerClick="handleLoginShow" @click.stop></Login>
+    </transition>
+  </div>
 </template>
 <script setup lang="ts">
-import Nav from "../components/business/nav/index.vue";
-import Login from "../components/business/login/index.vue";
-import { ref } from 'vue'
-import {useUserStore} from "@/store/user";
-import {useTokenStore} from "@/store/token";
+  import Nav from '../components/business/nav/index.vue'
+  import Login from '../components/business/login/index.vue'
+  import { ref } from 'vue'
+  import { useUserStore } from '@/store/user'
+  import { useTokenStore } from '@/store/token'
 
-const layoutContainer = ref();
-const loginShow = ref<boolean>(false);
-const handleLoginShow = () => {
-  loginShow.value = !loginShow.value;
-}
-
-const handleContainerClick = () => { // 定义具名函数
-  if (!userStore.user?.id) {
-    handleLoginShow();
+  const layoutContainer = ref()
+  const loginShow = ref<boolean>(false)
+  const handleLoginShow = () => {
+    loginShow.value = !loginShow.value
   }
-};
 
-const userStore = useUserStore();
-const tokenStore = useTokenStore();
-
-
-onMounted(()=>{
-  // 初始化时根据用户状态添加监听
-  console.log(userStore.user)
-  // console.log(import.meta.env.MODE)
-  // console.log(import.meta.env.VITE_API_BASE_URL)
-  if (tokenStore.isTokenExpired()) {
-    layoutContainer.value?.addEventListener('click', handleContainerClick);
+  const handleContainerClick = () => {
+    // 定义具名函数
+    if (!userStore.user?.id) {
+      handleLoginShow()
+    }
   }
-})
 
-onBeforeUnmount(() => {
-  layoutContainer.value?.removeEventListener('click', handleContainerClick);
-  loginShow.value = false;
-});
+  const userStore = useUserStore()
+  const tokenStore = useTokenStore()
 
-// 监听用户状态变化
-watch(
+  onMounted(() => {
+    // console.log(import.meta.env.MODE)
+    // console.log(import.meta.env.VITE_API_BASE_URL)
+    if (tokenStore.isTokenExpired()) {
+      layoutContainer.value?.addEventListener('click', handleContainerClick)
+    }
+  })
+
+  onBeforeUnmount(() => {
+    layoutContainer.value?.removeEventListener('click', handleContainerClick)
+    loginShow.value = false
+  })
+
+  // 监听用户状态变化
+  watch(
     () => tokenStore.expire,
     () => {
       if (!tokenStore.isTokenExpired()) {
-        layoutContainer.value?.removeEventListener('click', handleContainerClick);
-        loginShow.value = false;
+        layoutContainer.value?.removeEventListener('click', handleContainerClick)
+        loginShow.value = false
       } else {
-        layoutContainer.value?.addEventListener('click', handleContainerClick);
+        layoutContainer.value?.addEventListener('click', handleContainerClick)
       }
     }
-);
+  )
 </script>
 
 <style scoped>
-.layout-container {
+  .layout-container {
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-}
+  }
 
-.layout__header {
+  .layout__header {
     position: relative;
     width: 100%;
     height: clamp(64px, 5vh, 104px);
     min-height: 64px;
     border-bottom: 1px solid #ccc;
-}
+  }
 
-.layout__main {
+  .layout__main {
     position: relative;
     width: 100%;
     flex-grow: 1;
     max-height: 99%;
-}
+  }
 
-.fade-enter-active,
-.fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: opacity 0.3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>
-
-

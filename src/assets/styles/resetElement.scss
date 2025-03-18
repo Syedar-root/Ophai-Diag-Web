@@ -1,6 +1,5 @@
-@use "sass:map";
-@use "./vars.scss" as vars;
-
+@use 'sass:map';
+@use './vars.scss' as vars;
 
 @mixin resetInput() {
   //--el-input-border-color: #{map.get(vars.$colors, neutral-7)};
@@ -10,12 +9,10 @@
   //--el-input-disabled-background-color: #{map.get(vars.$colors, neutral-1)};
 }
 
-@mixin resetButton(
-  $type: primary,
-) {
+@mixin resetButton($type: primary) {
   border-radius: 0.5rem;
   //background-color: map.get(vars.$colors, $type);
-  &:hover{
+  &:hover {
     background-color: map.get(vars.$colors, #{$type}-dark-1);
   }
 }

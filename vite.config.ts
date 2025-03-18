@@ -16,7 +16,7 @@ export default defineConfig({
     alias: {
       '@': pathSrc,
       '@assets': path.resolve(__dirname, './src/assets')
-    },
+    }
   },
   plugins: [
     Vue(),
@@ -52,11 +52,11 @@ export default defineConfig({
         // 自动导入图标组件
         IconsResolver({
           prefix: 'Icon',
-          enabledCollections: ['ep'],
-        }),
+          enabledCollections: ['ep']
+        })
       ],
 
-      dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts')
     }),
     Components({
       resolvers: [
@@ -64,26 +64,26 @@ export default defineConfig({
         // 自动注册图标组件
         IconsResolver({
           prefix: 'Icon',
-          enabledCollections: ['ep'],
+          enabledCollections: ['ep']
         }),
         // Auto register Element Plus components
         // 自动导入 Element Plus 组件
-        ElementPlusResolver({importStyle: 'sass'}),
+        ElementPlusResolver({ importStyle: 'sass' })
       ],
 
-      dts: path.resolve(pathSrc, 'components.d.ts'),
+      dts: path.resolve(pathSrc, 'components.d.ts')
     }),
     Icons({
-      autoInstall: true,
+      autoInstall: true
     }),
-    Inspect(),
+    Inspect()
   ],
 
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/assets/styles/element-vars.scss" as *;`,
-      },
-    },
+        additionalData: `@use "@/assets/styles/element-vars.scss" as *;`
+      }
+    }
   }
 })

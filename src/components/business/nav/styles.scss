@@ -1,5 +1,5 @@
 @use '../../../assets/styles/vars.scss' as vars;
-@use"sass:map";
+@use 'sass:map';
 .nav-container {
   position: relative;
   width: 100%;
@@ -26,7 +26,7 @@
   margin-right: 3rem;
   margin-left: 1rem;
 
-  .nav-logo{
+  .nav-logo {
     position: relative;
     width: 100%;
   }
@@ -39,40 +39,39 @@
   height: 100%;
   @include flex-center();
   justify-content: start;
-  gap: map.get(vars.$space,xxl);
-  .tab-item{
+  gap: map.get(vars.$space, xxl);
+  .tab-item {
     position: relative;
     @include flex-center();
-    width: clamp(70px,8%,100px);
+    width: clamp(70px, 8%, 100px);
     height: 100%;
-    $color:map-get(vars.$colors,primary);
-    span{
+    $color: map-get(vars.$colors, primary);
+    span {
       width: 100%;
       height: 100%;
-      font-size: map-get(vars.$font-size,m);
+      font-size: map-get(vars.$font-size, m);
       background: linear-gradient(to right, $color, $color) no-repeat right bottom;
-      background-size: 0 2px ;
+      background-size: 0 2px;
       transition-duration: 0.3s;
-      transition-property: background-size,color,font-size,text-shadow;
+      transition-property: background-size, color, font-size, text-shadow;
       //will-change: font-weight;
       transition-timing-function: ease-in-out;
       cursor: pointer;
       @include flex-center();
-      &:hover{
+      &:hover {
         color: $color;
         background: linear-gradient(to right, $color, $color) no-repeat left bottom;
         background-size: 100% 2px;
       }
     }
-    &.active{
-      span{
+    &.active {
+      span {
         color: $color;
         background: linear-gradient(to right, $color, $color) no-repeat left bottom;
         background-size: 100% 2px;
       }
     }
   }
-
 }
 
 // user area
@@ -81,39 +80,38 @@
   flex-grow: 4;
   height: 100%;
   @include flex-center();
-  .icon-item{
+  .icon-item {
     @include flex-center();
     margin-right: 1rem;
-    :deep(path){
-      fill: map-get(vars.$colors,neutral-6);
+    :deep(path) {
+      fill: map-get(vars.$colors, neutral-6);
       transition: all 0.3s;
     }
-    &:hover{
-      :deep(path){
-        fill: map-get(vars.$colors,primary);
-        
+    &:hover {
+      :deep(path) {
+        fill: map-get(vars.$colors, primary);
       }
     }
   }
-  .user-item{
+  .user-item {
     display: flex;
     flex-direction: row;
     gap: 16px;
     margin-left: 1rem;
-    .user-item__avatar{
+    .user-item__avatar {
       @include flex-center();
     }
-    .user-item__info{
+    .user-item__info {
       @include flex-center();
       flex-direction: column;
       align-items: start;
 
-      .user-item__info__name{
-        font-size: map-get(vars.$font-size,s);
+      .user-item__info__name {
+        font-size: map-get(vars.$font-size, s);
       }
-     .user-item__info__department{
-        font-size: map-get(vars.$font-size,xs);
-     }
+      .user-item__info__department {
+        font-size: map-get(vars.$font-size, xs);
+      }
     }
   }
 }

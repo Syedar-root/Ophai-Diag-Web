@@ -1,13 +1,13 @@
-@use "sass:map";
-@use "@/assets/styles/vars" as vars;
-@use "@/assets/styles/resetElement" as resetElement;
+@use 'sass:map';
+@use '@/assets/styles/vars' as vars;
+@use '@/assets/styles/resetElement' as resetElement;
 
-$severity:(
-        slight:map.get(vars.$colors,success),
-        moderate:map.get(vars.$colors,warning),
-        severe:map.get(vars.$colors,danger),
+$severity: (
+  slight: map.get(vars.$colors, success),
+  moderate: map.get(vars.$colors, warning),
+  severe: map.get(vars.$colors, danger)
 );
-@mixin left-area{
+@mixin left-area {
   width: 100%;
   height: auto;
   display: flex;
@@ -15,33 +15,33 @@ $severity:(
   justify-content: start;
   align-items: start;
 
-  .title{
+  .title {
     width: 100%;
     text-align: start;
-    font-size: map.get(vars.$font-size,l);
+    font-size: map.get(vars.$font-size, l);
     font-weight: bold;
-    margin-bottom: map.get(vars.$space,m);
+    margin-bottom: map.get(vars.$space, m);
   }
 }
-@mixin point{
+@mixin point {
   position: relative;
   width: 0.5rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  margin-right: map.get(vars.$space,s);
+  margin-right: map.get(vars.$space, s);
 
-  @each $key,$value in $severity{
-    &.is-#{$key}{
+  @each $key, $value in $severity {
+    &.is-#{$key} {
       background-color: $value;
     }
   }
 }
-@mixin card{
-  border: 1px solid map.get(vars.$colors,neutral-14);
+@mixin card {
+  border: 1px solid map.get(vars.$colors, neutral-14);
   border-radius: 0.5rem;
-  padding: map.get(vars.$space,s);
+  padding: map.get(vars.$space, s);
   background-color: #fff;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .dd-container {
@@ -49,9 +49,9 @@ $severity:(
   height: 100%;
   display: flex;
   flex-direction: row;
-  $padding: map.get(vars.$space,m);
+  $padding: map.get(vars.$space, m);
   padding: $padding;
-  background-color: map.get(vars.$colors,_white);
+  background-color: map.get(vars.$colors, _white);
 }
 
 .dd-container__left,
@@ -71,26 +71,26 @@ $severity:(
   width: 60%;
 }
 
-.dd-container__left{
-  $padding: map.get(vars.$space,s);
+.dd-container__left {
+  $padding: map.get(vars.$space, s);
   padding: $padding;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: map.get(vars.$space,s);
-  border-right: 1px solid map.get(vars.$colors,neutral-7);
+  gap: map.get(vars.$space, s);
+  border-right: 1px solid map.get(vars.$colors, neutral-7);
 }
 
-.patient-info-area{
+.patient-info-area {
   @include left-area;
-  .patient-info-area__content{
+  .patient-info-area__content {
     width: 100%;
     height: auto;
     @include card;
 
-    .base-info{
+    .base-info {
       width: 100%;
-      .base-info-item{
+      .base-info-item {
         align-self: start;
         width: 100%;
         height: 100%;
@@ -98,51 +98,51 @@ $severity:(
         flex-direction: column;
         align-items: start;
 
-        label{
+        label {
           width: 100%;
           text-align: start;
-          font-size: map.get(vars.$font-size,s);
-          color: map.get(vars.$colors,neutral-3);
-          margin-bottom: map.get(vars.$space,xxxs);
+          font-size: map.get(vars.$font-size, s);
+          color: map.get(vars.$colors, neutral-3);
+          margin-bottom: map.get(vars.$space, xxxs);
         }
-        span{
+        span {
           width: 100%;
           height: auto;
           text-align: start;
-          font-size: map.get(vars.$font-size,m);
+          font-size: map.get(vars.$font-size, m);
           font-weight: 600;
-          color: map.get(vars.$colors,neutral-1);
-          margin-bottom: map.get(vars.$space,s);
-          overflow-wrap: break-word;  // 允许在任意字符间断行
-          word-break: break-all;     // 允许在单词内断行
+          color: map.get(vars.$colors, neutral-1);
+          margin-bottom: map.get(vars.$space, s);
+          overflow-wrap: break-word; // 允许在任意字符间断行
+          word-break: break-all; // 允许在单词内断行
           white-space: normal;
         }
       }
     }
 
-    hr{
+    hr {
       width: 100%;
-      $color: map.get(vars.$colors,neutral-14);
+      $color: map.get(vars.$colors, neutral-14);
       color: $color;
       background-color: $color;
       border-color: $color;
     }
 
-    .history-case{
+    .history-case {
       position: relative;
       width: 100%;
       display: flex;
       flex-direction: column;
-      $padding: map.get(vars.$space,s);
+      $padding: map.get(vars.$space, s);
       padding: $padding;
-      .title{
+      .title {
         width: 100%;
         height: auto;
         margin: 0;
         text-align: start;
-        font-size: map.get(vars.$font-size,m);
+        font-size: map.get(vars.$font-size, m);
       }
-      .history-case__content{
+      .history-case__content {
         position: relative;
         width: 100%;
         height: auto;
@@ -150,41 +150,40 @@ $severity:(
         flex-direction: column;
         justify-content: start;
         align-items: start;
-        $gap: map.get(vars.$space,s);
+        $gap: map.get(vars.$space, s);
         gap: $gap;
 
-        .history-case__item{
+        .history-case__item {
           position: relative;
           width: 100%;
           height: auto;
           display: flex;
           align-items: center;
 
-
-          .point{
+          .point {
             @include point;
           }
-          .info{
+          .info {
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: start;
             align-items: start;
-            .date{
+            .date {
               width: 100%;
               text-align: start;
-              font-size: map.get(vars.$font-size,m);
+              font-size: map.get(vars.$font-size, m);
               font-weight: 600;
             }
-            .description{
+            .description {
               width: 100%;
               text-align: start;
-              font-size: map.get(vars.$font-size,s);
-              color: map.get(vars.$colors,neutral-3);
-              margin-top: map.get(vars.$space,xxxs);
+              font-size: map.get(vars.$font-size, s);
+              color: map.get(vars.$colors, neutral-3);
+              margin-top: map.get(vars.$space, xxxs);
             }
           }
-          .el-icon{
+          .el-icon {
             position: absolute;
             right: 0;
             top: 50%;
@@ -192,21 +191,20 @@ $severity:(
           }
         }
       }
-
     }
   }
 }
 
-.image-info-area{
- @include left-area;
-  .image-content{
+.image-info-area {
+  @include left-area;
+  .image-content {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: space-around;
     @include card;
 
-    .image-item{
+    .image-item {
       position: relative;
       width: 40%;
       aspect-ratio: 1/1;
@@ -220,7 +218,7 @@ $severity:(
         transform: scale(0.95);
       }
 
-      img{
+      img {
         position: relative;
         width: 100%;
         height: 100%;
@@ -231,7 +229,7 @@ $severity:(
   }
 }
 
-.dd-container__center{
+.dd-container__center {
   overflow: scroll;
   &::-webkit-scrollbar {
     width: 8px;
@@ -270,29 +268,28 @@ $severity:(
   }
 }
 
-.dd-container__center{
+.dd-container__center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  $gap: map.get(vars.$space,l);
+  $gap: map.get(vars.$space, l);
   gap: $gap;
-  $padding: map.get(vars.$space,m);
+  $padding: map.get(vars.$space, m);
   padding: $padding;
 
-
-  .image-view{
+  .image-view {
     position: relative;
     width: 90%;
     height: auto;
     max-width: 100%;
     //aspect-ratio: 1/1;
     object-fit: contain;
-    background-color: map.get(vars.$colors,neutral-14);
+    background-color: map.get(vars.$colors, neutral-14);
     border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    .image-view__opt{
+    .image-view__opt {
       position: absolute;
       top: 0;
       right: 0;
@@ -300,48 +297,48 @@ $severity:(
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: map.get(vars.$space,xs);
+      gap: map.get(vars.$space, xs);
     }
-    .img{
+    .img {
       width: 70%;
       aspect-ratio: 1/1;
       object-fit: contain;
     }
   }
 
-  .ai-diag-area{
+  .ai-diag-area {
     width: 100%;
     flex-grow: 1;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: start;
-    $padding: map.get(vars.$space,xxxl);
+    $padding: map.get(vars.$space, xxxl);
     padding: $padding;
 
-    .title{
+    .title {
       margin-left: 5%;
-      font-size: map.get(vars.$font-size,m);
+      font-size: map.get(vars.$font-size, m);
       font-weight: 600;
-      margin-bottom: map.get(vars.$space,m);
+      margin-bottom: map.get(vars.$space, m);
     }
-    .ai-diag-area__content{
+    .ai-diag-area__content {
       position: relative;
       width: 100%;
       height: auto;
       display: flex;
       justify-content: space-around;
 
-      .diag{
+      .diag {
         width: 50%;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: map.get(vars.$space,m);
+        gap: map.get(vars.$space, m);
 
-       .diag-item{
+        .diag-item {
           position: relative;
           width: 85%;
           height: 85%;
@@ -351,38 +348,36 @@ $severity:(
           align-items: start;
           @include card;
 
-         .title{
+          .title {
             position: relative;
             width: 100%;
-            font-size: map.get(vars.$font-size,m);
+            font-size: map.get(vars.$font-size, m);
             font-weight: 500;
             text-align: start;
             margin: 0 0 map.get(vars.$space, xxs) 0;
-            border-bottom: 1px solid map.get(vars.$colors,neutral-14);
+            border-bottom: 1px solid map.get(vars.$colors, neutral-14);
           }
 
-         .find-item{
-           width: 100%;
-           display: flex;
-           justify-content: start;
-           align-items: center;
-           $padding: map.get(vars.$space,s);
-           padding: 0 $padding 0 $padding;
-           margin-bottom: map.get(vars.$space,xs);
-           .point{
-             @include point;
-             flex-shrink: 0;
-           }
-          .info{
-            text-align: start;
-            text-wrap: wrap;
+          .find-item {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            $padding: map.get(vars.$space, s);
+            padding: 0 $padding 0 $padding;
+            margin-bottom: map.get(vars.$space, xs);
+            .point {
+              @include point;
+              flex-shrink: 0;
+            }
+            .info {
+              text-align: start;
+              text-wrap: wrap;
+            }
           }
-         }
-
-
-       }
+        }
       }
-      .chart{
+      .chart {
         width: 50%;
         height: 100%;
         display: flex;
@@ -393,30 +388,30 @@ $severity:(
   }
 }
 
-.dd-container__right{
-  $padding: map.get(vars.$space,s);
+.dd-container__right {
+  $padding: map.get(vars.$space, s);
   padding: $padding;
   display: flex;
   flex-direction: column;
   justify-content: start;
 
-  .title{
+  .title {
     width: 100%;
     text-align: start;
-    font-size: map.get(vars.$font-size,l);
+    font-size: map.get(vars.$font-size, l);
     font-weight: 600;
-    margin-bottom: map.get(vars.$space,m);
+    margin-bottom: map.get(vars.$space, m);
   }
-  .report-container{
+  .report-container {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: map.get(vars.$space,s);
+    gap: map.get(vars.$space, s);
 
-    .report-item{
+    .report-item {
       position: relative;
       width: 100%;
       height: auto;
@@ -425,42 +420,49 @@ $severity:(
       justify-content: start;
       align-items: center;
       @include card;
-      .report-item__title{
+      .report-item__title {
         width: 100%;
         min-height: 3rem;
         display: flex;
         justify-content: start;
         align-items: center;
-        font-size: map.get(vars.$font-size,m);
+        font-size: map.get(vars.$font-size, m);
         font-weight: 500;
-        border-bottom: 1px solid map.get(vars.$colors,neutral-14);
-        margin-bottom: map.get(vars.$space,s);
+        border-bottom: 1px solid map.get(vars.$colors, neutral-14);
+        margin-bottom: map.get(vars.$space, s);
       }
-     .report-item__content{
-       width: 100%;
-       text-align: start;
-       font-size: map.get(vars.$font-size,s);
-       label{
-         color: map.get(vars.$colors,neutral-3);
-       }
-       span{
-         color: map.get(vars.$colors,neutral-1);
-       }
-     }
+      .report-item__content {
+        width: 100%;
+        text-align: start;
+        font-size: map.get(vars.$font-size, s);
+        label {
+          color: map.get(vars.$colors, neutral-3);
+        }
+        span {
+          color: map.get(vars.$colors, neutral-1);
+        }
+      }
     }
-    .report-opt{
+    .report-opt {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      .save{
+      .save {
         @include resetElement.resetButton();
       }
-      .export{
-        @include resetElement.resetButton($type:"info");
+      .export {
+        @include resetElement.resetButton($type: 'info');
       }
-
     }
   }
+}
+
+.empty-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

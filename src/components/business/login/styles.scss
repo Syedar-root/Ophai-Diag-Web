@@ -1,11 +1,11 @@
-@use "@/assets/styles/vars.scss" as vars;
+@use '@/assets/styles/vars.scss' as vars;
 @use '@/assets/styles/resetElement.scss' as resetElement;
 
 // 组件样式变量定义
-$container-clr--bg: map-get(vars.$colors,neutral-1);
-$title-clr--text: map-get(vars.$colors,neutral-2);
+$container-clr--bg: map-get(vars.$colors, neutral-1);
+$title-clr--text: map-get(vars.$colors, neutral-2);
 
-.login-container{
+.login-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -19,8 +19,8 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   backdrop-filter: blur(5px);
 }
 
-@mixin base-content{
-  background-color: map-get(vars.$colors,_white);
+@mixin base-content {
+  background-color: map-get(vars.$colors, _white);
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -28,18 +28,18 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   padding: 1rem;
   gap: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 10px rgba(map-get(vars.$colors,neutral-5),0.5);
+  box-shadow: 0 10px 10px rgba(map-get(vars.$colors, neutral-5), 0.5);
   transition: 0.3s ease-in-out;
 }
 
-.login-content{
+.login-content {
   width: 20%;
   height: 50%;
   min-width: 16rem;
   min-height: 32rem;
   @include base-content;
 
-  .login-section{
+  .login-section {
     height: 100%;
     width: 100%;
     display: flex;
@@ -47,7 +47,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
     justify-content: start;
     align-items: center;
   }
-  .register-section{
+  .register-section {
     height: 100%;
     width: 100%;
     display: flex;
@@ -57,7 +57,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   }
 }
 
-.login-content__logo{
+.login-content__logo {
   position: relative;
   width: 50%;
   height: 20%;
@@ -65,14 +65,14 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   align-items: end;
   justify-content: center;
 
-  .logo{
+  .logo {
     position: absolute;
     height: 50%;
     object-fit: contain;
   }
 }
 
-.login-content__title{
+.login-content__title {
   //color: map-get(vars.$colors,neutral-2);
   width: 100%;
   height: 10%;
@@ -81,40 +81,40 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   font-size: map-get(vars.$font-size, xl);
 }
 
-.login-content__form{
+.login-content__form {
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  .el-form{
+  .el-form {
     width: 80%;
     height: auto;
 
-    :deep{
-      .el-form-item{
+    :deep {
+      .el-form-item {
         margin-top: 1rem;
-        &.password-opt .el-form-item__content{
+        &.password-opt .el-form-item__content {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
       }
-      .el-input{
+      .el-input {
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
-        .el-input__wrapper{
+        .el-input__wrapper {
           border-radius: 0.5rem;
         }
-        .el-icon{
+        .el-icon {
           font-size: 1rem;
-          svg path{
-            fill: map-get(vars.$colors,neutral-5);
+          svg path {
+            fill: map-get(vars.$colors, neutral-5);
           }
         }
       }
-      .el-button{
+      .el-button {
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
@@ -122,21 +122,20 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
         @include resetElement.resetButton();
       }
 
-
-      .el-link{
+      .el-link {
         //color: map-get(vars.$colors,primary);
-        &:after{
+        &:after {
           border: 0;
         }
-        .el-link__inner{
-          $underline-color: map-get(vars.$colors,primary-dark-1);
+        .el-link__inner {
+          $underline-color: map-get(vars.$colors, primary-dark-1);
           background: linear-gradient(to right, $underline-color, $underline-color) no-repeat right bottom;
-          background-size: 0 2px ;
+          background-size: 0 2px;
           transition-duration: 0.3s;
-          transition-property: background-size,color;
+          transition-property: background-size, color;
           transition-timing-function: ease-in-out;
           cursor: pointer;
-          &:hover{
+          &:hover {
             color: $underline-color;
             background: linear-gradient(to right, $underline-color, $underline-color) no-repeat left bottom;
             background-size: 100% 2px;
@@ -147,18 +146,18 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   }
 }
 
-.login-content__register{
+.login-content__register {
   margin-top: -1rem;
   width: 100%;
   flex-grow: 1;
-  a{
-    font-size: map-get(vars.$font-size,s);
-    color: map-get(vars.$colors,neutral-5);
+  a {
+    font-size: map-get(vars.$font-size, s);
+    color: map-get(vars.$colors, neutral-5);
     underline: none;
   }
 }
 
-.register-content{
+.register-content {
   width: 40%;
   height: auto;
   min-width: 24rem;
@@ -169,7 +168,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   overflow: auto;
 }
 
-.register-content__title{
+.register-content__title {
   width: 100%;
   height: 10%;
   color: $title-clr--text;
@@ -180,7 +179,7 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   justify-content: center;
   margin-bottom: 8px;
 }
-.register-content__text{
+.register-content__text {
   width: 100%;
   height: 5%;
   color: $title-clr--text;
@@ -192,22 +191,22 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   transform: translateY(-80%);
 }
 
-.register-content__form{
-  :deep{
-    .el-form-item{
-      .el-form-item__label{
+.register-content__form {
+  :deep {
+    .el-form-item {
+      .el-form-item__label {
         width: 100%;
         margin-bottom: 0;
       }
 
-      .el-input{
+      .el-input {
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
-        .el-input__wrapper{
+        .el-input__wrapper {
           border-radius: 0.5rem;
         }
       }
-      .el-button{
+      .el-button {
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
@@ -218,14 +217,14 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   }
 }
 
-.register-content--login{
-  a{
-    font-size: map-get(vars.$font-size,s);
+.register-content--login {
+  a {
+    font-size: map-get(vars.$font-size, s);
     color: $title-clr--text;
     underline: none;
 
-    span{
-      color: map-get(vars.$colors,primary);
+    span {
+      color: map-get(vars.$colors, primary);
     }
   }
 }
@@ -234,10 +233,10 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
 .fade-leave-active {
   transition: all 0.25s ease-in-out;
 }
-.fade-enter-active{
+.fade-enter-active {
   transition-delay: 0.25s;
 }
-.fade-enter-from{
+.fade-enter-from {
   opacity: 0;
   transform: translateY(100%);
 }
@@ -245,4 +244,3 @@ $title-clr--text: map-get(vars.$colors,neutral-2);
   opacity: 0;
   transform: translateY(-100%);
 }
-

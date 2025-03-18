@@ -1,0 +1,21 @@
+# 忽略目录
+node_modules/
+dist/
+build/
+doc/
+
+# 忽略特定文件类型
+*.svg
+*.log
+
+# 忽略特定文件
+package-lock.json
+tsconfig.json
+
+# 忽略测试文件
+**/__tests__/*
+**/*.spec.js
+**/*.test.js
+
+**/auto-imports.d.ts
+**/components.d.ts

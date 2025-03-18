@@ -1,5 +1,5 @@
-@use "/src/assets/styles/vars.scss" as vars;
-@use "sass:map";
+@use '/src/assets/styles/vars.scss' as vars;
+@use 'sass:map';
 
 @mixin flex-center {
   display: flex;
@@ -16,25 +16,25 @@
   background-color: map-get(vars.$colors, _white);
   gap: 1rem;
 }
-.fu-container__title{
+.fu-container__title {
   width: 100%;
   @include flex-center;
   justify-content: space-between;
-  span{
+  span {
     font-size: map-get(vars.$font-size, l);
     font-weight: 800;
     color: map-get(vars.$colors, neutral-2);
   }
-  .bulkSwitch{
+  .bulkSwitch {
     margin-left: 1rem;
   }
 }
-.fu-container__main{
+.fu-container__main {
   width: 100%;
   height: 100%;
   @include flex-center;
 }
-.fu-container__footer{
+.fu-container__footer {
   position: fixed;
   width: 100%;
   height: 10%;
@@ -55,7 +55,7 @@
   transform: translateY(100%);
 }
 
-.fu-container__block{
+.fu-container__block {
   width: 90%;
   height: auto;
   display: flex;
@@ -69,7 +69,7 @@
   overflow: hidden;
 }
 
-.fu-container__left{
+.fu-container__left {
   @include flex-center;
   flex-direction: column;
   justify-content: start;
@@ -78,41 +78,41 @@
   width: 35%;
   gap: 1rem;
   margin-left: 1rem;
-  .fu-container__upload{
+  .fu-container__upload {
     width: 100%;
     height: auto;
-    .upload--text{
+    .upload--text {
       font-size: map-get(vars.$font-size, m);
-      &:active{
-         color: map-get(vars.$colors, primary);
+      &:active {
+        color: map-get(vars.$colors, primary);
       }
     }
-    .upload--tip{
+    .upload--tip {
       display: flex;
       justify-content: start;
-      padding-left:0.5rem ;
+      padding-left: 0.5rem;
       font-size: map-get(vars.$font-size, s);
       color: map-get(vars.$colors, neutral-5);
     }
   }
 
-  .fu-container__form{
+  .fu-container__form {
     width: 100%;
     height: 100%;
-    :deep(label){
+    :deep(label) {
       width: 100%;
     }
   }
 }
 
-.fu-container__right{
+.fu-container__right {
   position: relative;
   height: 100%;
   flex-grow: 1;
   @include flex-center;
   gap: 1rem;
   align-items: start;
-  .fu-container__block{
+  .fu-container__block {
     max-width: 100%;
     min-height: 50%;
     max-height: 90%;
@@ -120,37 +120,37 @@
     align-items: center;
   }
   .original,
-  .process{
+  .process {
     width: clamp(10rem, 60%, 20rem);
     height: clamp(5rem, 10%, 20rem);
     @include flex-center;
     flex-direction: column;
-    align-items:center ;
+    align-items: center;
     margin-bottom: 5%;
-    span{
+    span {
       font-size: map-get(vars.$font-size, m);
       font-weight: 600;
       align-self: center;
       margin-bottom: 0.1rem;
     }
   }
-  .fu-container__image{
+  .fu-container__image {
     width: 100%;
     aspect-ratio: 1/1;
     border-radius: 0.5rem;
-    .image-slot{
+    .image-slot {
       width: 100%;
       height: 100%;
       @include flex-center;
       background-color: map-get(vars.$colors, neutral-14);
-      .el-icon{
+      .el-icon {
         color: map.get(vars.$colors, neutral-10);
       }
     }
   }
 }
 
-.right__left{
+.right__left {
   height: 100%;
   width: 50%;
   @include flex-center;
@@ -158,7 +158,7 @@
   justify-content: start;
   padding: 1rem;
 }
-.right__right{
+.right__right {
   height: 100%;
   width: 50%;
   @include flex-center;
@@ -167,8 +167,8 @@
   padding: 1rem;
 }
 
-.fu-container__right{
-  .fu-container__grid{
+.fu-container__right {
+  .fu-container__grid {
     position: relative;
     width: 90%;
     height: auto;
@@ -181,12 +181,12 @@
     justify-items: center;
     align-content: start;
     overflow: auto;
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
       opacity: 0;
     }
     mask-image: linear-gradient(to bottom, transparent, black 0%, black 95%, transparent);
 
-    .grid-item{
+    .grid-item {
       position: relative;
       width: 100%;
       height: 100%;
