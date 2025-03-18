@@ -38,7 +38,7 @@
           <div class="history-case">
             <span class="title">历史病例</span>
             <div class="history-case__content">
-              <div v-for="(item, index) in historyCases" class="history-case__item" :key="index">
+              <div v-for="(item, index) in historyCases" class="history-case__item" :key="index" v-route="`/dd/${index}`">
                 <div class="point" :class="[{ [`is-${item.severity}`]: item.severity }]"></div>
                 <div class="info">
                   <span class="date">{{ item.date }}</span>
@@ -175,21 +175,31 @@
   const emptyText = ref('请前往病例管理页面选择病例查看')
   const viewCaseStore = useViewCaseStore()
   const route = useRoute()
-  let caseId: string | string[] | null = ''
-  onMounted(() => {
+  const caseId = ref<string | string[] | null>('')
+  const loadCaseData = () =>{
     if (route.params.id === '' || route.params.id === null || route.params.id === undefined) {
       if (viewCaseStore.viewCase.id !== '') {
-        caseId = viewCaseStore.viewCase.id
+        caseId.value = viewCaseStore.viewCase.id
         isEmpty.value = false
       } else {
         isEmpty.value = true
       }
     } else {
-      caseId = route.params.id
+      caseId.value = route.params.id
       isEmpty.value = false
       viewCaseStore.setViewCase({ id: route.params.id })
     }
+  }
+  onMounted(() => {
+    loadCaseData();
   })
+  watch(
+    () => route.params.id,
+    () => {
+      loadCaseData()
+    },
+    { immediate: true } // 立即执行一次以处理初始路由
+  )
 
   const historyCases = ref([
     { date: '2020-01-01', severity: 'slight', description: '疾病描述' },

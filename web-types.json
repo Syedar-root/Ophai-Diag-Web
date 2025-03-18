@@ -1,0 +1,18 @@
+
+{
+  "$schema": "https://json.schemastore.org/web-types",
+  "framework": "vue",
+  "name": "ophai_diag_web",
+  "version": "0.0.0",
+  "contributions": {
+    "html": {
+      "types-syntax": "typescript",
+      "attributes": [
+        {
+          "name": "v-route",
+          "description": "自定义路由跳转指令"
+        }
+      ]
+    }
+  }
+}

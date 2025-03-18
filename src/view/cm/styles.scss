@@ -104,6 +104,13 @@
     .table-opt {
       display: flex;
       gap: 10px;
+
+      .el-icon{
+        &:hover {
+          color: map.get(vars.$colors, primary);
+          cursor: pointer;
+        }
+      }
     }
   }
 }
