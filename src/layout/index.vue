@@ -72,6 +72,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: start;
+    align-items: center;
   }
 
   .layout__header {

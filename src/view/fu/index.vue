@@ -7,7 +7,7 @@
           <div class="fu-container__title">
             <span>图片上传</span>
             <span class="bulkSwitch">
-              <el-switch @change="handBulkUpload" v-model="bulkUpload" active-text="批量上传" />
+              <el-switch v-model="bulkUpload" active-text="批量上传" />
             </span>
           </div>
           <el-upload
@@ -25,7 +25,7 @@
             <el-icon class="el-icon--upload"><UploadFilled /></el-icon>
             <div class="upload--text">图片拖拽到此处或单击此处</div>
             <template #tip>
-              <div class="upload--tip">仅支持jpg格式。图片命名需要以"患者ID"+"_left"或"_right"来区分左右眼</div>
+              <div class="upload--tip">仅支持jpg格式。图片命名需要以 患者ID_患者姓名_left（或_right）来区分左右眼</div>
             </template>
           </el-upload>
         </div>
@@ -47,28 +47,28 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row :gutter="10" justify="space-between">
-              <el-col :span="12">
-                <el-form-item label="性别" required>
-                  <el-select v-model="query.patientGender">
-                    <el-option label="男" value="male"></el-option>
-                    <el-option label="女" value="female"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="年龄" required>
-                  <el-input v-model="query.patientAge"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row justify="space-between">
-              <el-col :span="24">
-                <el-form-item label="主诉症状">
-                  <el-input-tag v-model="query.patientComplaint"></el-input-tag>
-                </el-form-item>
-              </el-col>
-            </el-row>
+<!--            <el-row :gutter="10" justify="space-between">-->
+<!--              <el-col :span="12">-->
+<!--                <el-form-item label="性别" required>-->
+<!--                  <el-select v-model="query.patientGender">-->
+<!--                    <el-option label="男" value="male"></el-option>-->
+<!--                    <el-option label="女" value="female"></el-option>-->
+<!--                  </el-select>-->
+<!--                </el-form-item>-->
+<!--              </el-col>-->
+<!--              <el-col :span="12">-->
+<!--                <el-form-item label="年龄" required>-->
+<!--                  <el-input v-model="query.patientAge"></el-input>-->
+<!--                </el-form-item>-->
+<!--              </el-col>-->
+<!--            </el-row>-->
+<!--            <el-row justify="space-between">-->
+<!--              <el-col :span="24">-->
+<!--                <el-form-item label="主诉症状">-->
+<!--                  <el-input-tag v-model="query.patientComplaint"></el-input-tag>-->
+<!--                </el-form-item>-->
+<!--              </el-col>-->
+<!--            </el-row>-->
           </el-form>
         </div>
       </div>
@@ -87,7 +87,7 @@
                 class="fu-container__image"
                 fit="contain"
                 :preview-src-list="srcList"
-                :src="previewImageList.rawLeft">
+                :src="singleList.rawLeft">
                 <template #error>
                   <div class="image-slot">
                     <el-icon size="1.5rem"><Picture /></el-icon>
@@ -106,7 +106,7 @@
                 class="fu-container__image"
                 fit="contain"
                 :preview-src-list="srcList"
-                :src="previewImageList.rawRight">
+                :src="singleList.rawRight">
                 <template #error>
                   <div class="image-slot">
                     <el-icon size="1.5rem"><Picture /></el-icon>
@@ -119,7 +119,10 @@
         <!--          批量上传-->
         <div class="fu-container__block fu-container__grid" v-show="bulkUpload">
           <div class="grid-item" v-for="(patient, index) in bulkList" :key="index">
-            <span>{{ patient.patientId }}</span>
+            <div class="grid-item__label">
+              <span>ID：{{ patient.patientId }}</span>
+              <span>姓名：{{ patient.patientName }}</span>
+            </div>
             <el-image
               class="fu-container__image"
               fit="contain"
@@ -165,28 +168,23 @@
   const limit = computed(() => {
     fileList.value = []
     bulkList.value = []
-    previewImageList.value = { rawLeft: '', rawRight: '' }
+    singleList.value = { rawLeft: '', rawRight: '', leftFile: null, rightFile: null }
     return bulkUpload.value ? undefined : 2
   })
   onMounted(() => {
     document.addEventListener('mousemove', e => {
-      if (e.y > window.innerHeight / 1.5) {
-        footerShow.value = true
-      } else {
-        footerShow.value = false
-      }
+      footerShow.value = e.y > window.innerHeight / 1.5;
     })
   })
 
   const fileList = ref<any>([])
   const bulkList = ref<Array<BulkImage>>([])
-  function handBulkUpload() {
-    console.log(fileList.value)
-  }
 
-  const previewImageList = ref<any>({
+  const singleList = ref<any>({
     rawLeft: '',
-    rawRight: ''
+    rawRight: '',
+    leftFile: null,
+    rightFile: null,
   })
 
   const updatePreviewImages = async (uploadFiles: any[]) => {
@@ -194,7 +192,7 @@
     if (bulkUpload.value) {
       bulkList.value = []
     } else {
-      previewImageList.value = { rawLeft: '', rawRight: '' }
+      singleList.value = { rawLeft: '', rawRight: '', leftFile: null, rightFile: null }
     }
 
     // 创建临时存储对象（用于批量模式）
@@ -205,6 +203,7 @@
         right?: File
         previewLeft?: string
         previewRight?: string
+        patientName?: string
       }
     >()
 
@@ -218,7 +217,7 @@
         await validate({ name: fileName }, imageSchema)
 
         // 解析患者ID和眼睛类型
-        const [patientId, eyeType] = fileName.split('_')
+        const [patientId, patientName,eyeType] = fileName.split('_')
         const upperPatientId = patientId.toUpperCase()
 
         // 批量模式处理
@@ -234,16 +233,21 @@
             patientEntry.right = file
             patientEntry.previewRight = URL.createObjectURL(file)
           }
+          // 更新患者姓名
+          patientEntry.patientName = patientName
           // 更新Map条目
           patientMap.set(upperPatientId, patientEntry)
         }
         // 单个模式处理
         else {
           query.value.patientId = upperPatientId
+          query.value.patientName = patientName
           if (eyeType.includes('left')) {
-            previewImageList.value.rawLeft = URL.createObjectURL(file)
+            singleList.value.leftFile = file
+            singleList.value.rawLeft = URL.createObjectURL(file)
           } else if (eyeType.includes('right')) {
-            previewImageList.value.rawRight = URL.createObjectURL(file)
+            singleList.value.rightFile = file
+            singleList.value.rawRight = URL.createObjectURL(file)
           }
         }
       }
@@ -251,8 +255,9 @@
       // 生成批量模式预览数据
       // 转换Map到bulkList（保证唯一性）
       if (bulkUpload.value) {
-        bulkList.value = Array.from(patientMap, ([patientId, files]) => ({
+        bulkList.value = Array.from(patientMap, ([patientId,files]) => ({
           patientId,
+          patientName: files.patientName || '',
           leftFile: files.left || null,
           rightFile: files.right || null,
           previewLeft: files.previewLeft || '',
@@ -266,15 +271,13 @@
       if (bulkUpload.value) {
         bulkList.value = []
       } else {
-        previewImageList.value = { rawLeft: '', rawRight: '' }
+        singleList.value = { rawLeft: '', rawRight: '' }
       }
       // 这里可以添加ElementPlus的错误提示
     }
   }
 
   const handleFileChange = (_: any, uploadFiles: any[]) => {
-    console.log(uploadFiles)
-    console.log(fileList)
     fileList.value = uploadFiles
     updatePreviewImages(fileList.value)
   }
@@ -286,12 +289,12 @@
 
   // 组件卸载时释放资源
   onUnmounted(() => {
-    if (previewImageList.value.rawLeft) URL.revokeObjectURL(previewImageList.value.rawLeft)
-    if (previewImageList.value.rawRight) URL.revokeObjectURL(previewImageList.value.rawRight)
+    if (singleList.value.rawLeft) URL.revokeObjectURL(singleList.value.rawLeft)
+    if (singleList.value.rawRight) URL.revokeObjectURL(singleList.value.rawRight)
   })
 
   const srcList = computed(() => {
-    return [previewImageList.value.rawLeft, previewImageList.value.rawRight]
+    return [singleList.value.rawLeft, singleList.value.rawRight]
   })
 
   const query = ref<ffDTO>({
@@ -304,19 +307,25 @@
 
   // 修改提交处理函数
   const handleSubmit = () => {
+    // console.log(bulkList.value[0].leftFile)
     if (bulkUpload.value) {
       // 批量提交逻辑
-      const submitData = bulkList.value.map(patient => ({
-        patientId: patient.patientId,
-        // 这里可以添加其他需要提交的字段
-        leftFile: patient.leftFile,
-        rightFile: patient.rightFile
-      }))
-      console.log('批量提交数据:', submitData)
+      const formData :FormData = new FormData()
+      bulkList.value.forEach((item) => {
+        formData.append(item.patientId, item.leftFile as File)
+        formData.append(item.patientId, item.rightFile as File)
+      })
+      // console.log('批量提交数据:', formData)
       // TODO: 调用实际API接口
     } else {
       // 单个提交逻辑
-      console.log('单个提交数据:', query.value)
+      const formData :FormData = new FormData()
+      formData.append(query.value.patientId, singleList.value.leftFile as File)
+      formData.append(query.value.patientId, singleList.value.rightFile as File)
+      // console.log('单个提交数据:',formData)
+      // for (const [key, value] of formData.entries()) {
+      //   console.log(key, value)
+      // }
       // TODO: 调用实际API接口
     }
   }

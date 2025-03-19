@@ -21,7 +21,7 @@ $MaxStep: 9;
 }
 
 // 添加 _white 和 _black
-$_white: color.mix(#fff, map.get($colors, primary), 99%);
+$_white: color.mix(#fafafa, map.get($colors, primary), 98%);
 $_black: color.mix(#000, map.get($colors, primary), 99%);
 $colors: map.merge(
   $colors,

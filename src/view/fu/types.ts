@@ -8,6 +8,7 @@ export interface ffDTO {
 
 export interface BulkImage {
   patientId: string
+  patientName: string
   leftFile: File | null
   rightFile: File | null
   previewLeft: string
