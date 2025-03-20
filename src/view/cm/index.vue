@@ -1,7 +1,7 @@
 <template>
   <div class="cm-container">
     <div class="cm-header">
-      <el-row class="header-input-row" :gutter="4">
+      <el-row class="cm-header__input-row" :gutter="4">
         <el-col :span="21">
           <el-input v-model="query.caseId" placeholder="请输入要查询病例ID" :prefix-icon="Search" clearable></el-input>
         </el-col>
@@ -9,7 +9,7 @@
           <el-button @click="handleAddCase" type="primary" :icon="CirclePlus">新增病例</el-button>
         </el-col>
       </el-row>
-      <el-row class="header-select-row" :gutter="10">
+      <el-row class="cm-header__select-row" :gutter="10">
         <el-col :span="4">
           <div class="select-area">
             <label>疾病分类</label>
@@ -59,7 +59,7 @@
       </el-table>
     </div>
     <div class="cm-footer">
-      <el-pagination background layout="total,prev, pager, next" :total="1000" />
+      <el-pagination background layout="total,prev,pager,next" :total="1000" />
     </div>
   </div>
 </template>

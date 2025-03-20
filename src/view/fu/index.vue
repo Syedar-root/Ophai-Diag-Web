@@ -2,16 +2,16 @@
   <div class="fu-container">
     <div class="fu-container__main">
       <!--        左边-->
-      <div class="fu-container__left">
-        <div class="fu-container__block">
-          <div class="fu-container__title">
+      <div class="fu-container__main-left">
+        <div class="picture-upload-container">
+          <div class="picture-upload-container__title">
             <span>图片上传</span>
             <span class="bulkSwitch">
               <el-switch v-model="bulkUpload" active-text="批量上传" />
             </span>
           </div>
           <el-upload
-            class="fu-container__upload"
+            class="picture-upload-container__upload"
             :show-file-list="bulkUpload"
             v-model:file-list="fileList"
             :limit="limit"
@@ -30,85 +30,63 @@
           </el-upload>
         </div>
 
-        <div class="fu-container__block" v-show="!bulkUpload">
-          <div class="fu-container__title">
+        <div class="fu-container__block patient-info-container" v-show="!bulkUpload">
+          <div class="patient-info-container__title">
             <span>患者信息</span>
           </div>
-          <el-form class="fu-container__form" label-position="top" require-asterisk-position="right">
+          <el-form class="patient-info-container__form" label-position="top" require-asterisk-position="right">
             <el-row :gutter="10" justify="space-between">
               <el-col :span="12">
                 <el-form-item label="患者ID" required>
-                  <el-input v-model="query.patientId"></el-input>
+                  <el-input disabled v-model="query.patientId"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="姓名" required>
-                  <el-input v-model="query.patientName"></el-input>
+                  <el-input disabled v-model="query.patientName"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
-<!--            <el-row :gutter="10" justify="space-between">-->
-<!--              <el-col :span="12">-->
-<!--                <el-form-item label="性别" required>-->
-<!--                  <el-select v-model="query.patientGender">-->
-<!--                    <el-option label="男" value="male"></el-option>-->
-<!--                    <el-option label="女" value="female"></el-option>-->
-<!--                  </el-select>-->
-<!--                </el-form-item>-->
-<!--              </el-col>-->
-<!--              <el-col :span="12">-->
-<!--                <el-form-item label="年龄" required>-->
-<!--                  <el-input v-model="query.patientAge"></el-input>-->
-<!--                </el-form-item>-->
-<!--              </el-col>-->
-<!--            </el-row>-->
-<!--            <el-row justify="space-between">-->
-<!--              <el-col :span="24">-->
-<!--                <el-form-item label="主诉症状">-->
-<!--                  <el-input-tag v-model="query.patientComplaint"></el-input-tag>-->
-<!--                </el-form-item>-->
-<!--              </el-col>-->
-<!--            </el-row>-->
           </el-form>
         </div>
       </div>
 
       <!--        右边-->
-      <div class="fu-container__right">
+      <div class="fu-container__main-right">
         <!--          单个上传-->
-        <div class="fu-container__block" v-show="!bulkUpload" style="flex-direction: row">
-          <div class="right__left">
-            <div class="fu-container__title">
+        <div class="single-upload-container" v-show="!bulkUpload" style="flex-direction: row">
+          <div class="single-upload-container__content">
+            <div class="single-upload-container__title">
               <span>左眼</span>
             </div>
-            <div class="original">
+            <div class="image-item">
               <span>原始图像</span>
               <el-image
-                class="fu-container__image"
+                class="image-item__image"
                 fit="contain"
                 :preview-src-list="srcList"
                 :src="singleList.rawLeft">
                 <template #error>
-                  <div class="image-slot">
+                  <div class="image-item__error">
                     <el-icon size="1.5rem"><Picture /></el-icon>
                   </div>
                 </template>
               </el-image>
             </div>
           </div>
-          <div class="right__right">
-            <div class="fu-container__title">
+          <div class="single-upload-container__content">
+            <div class="single-upload-container__title">
               <span>右眼</span>
             </div>
-            <div class="original">
+            <div class="image-item">
               <span>原始图像</span>
               <el-image
-                class="fu-container__image"
+                class="image-item__image"
                 fit="contain"
                 :preview-src-list="srcList"
                 :src="singleList.rawRight">
                 <template #error>
-                  <div class="image-slot">
+                  <div class="image-item__error">
                     <el-icon size="1.5rem"><Picture /></el-icon>
                   </div>
                 </template>
@@ -117,30 +95,30 @@
           </div>
         </div>
         <!--          批量上传-->
-        <div class="fu-container__block fu-container__grid" v-show="bulkUpload">
+        <div class="bulk-upload-container" v-show="bulkUpload">
           <div class="grid-item" v-for="(patient, index) in bulkList" :key="index">
             <div class="grid-item__label">
-              <span>ID：{{ patient.patientId }}</span>
+              <label>ID：{{ patient.patientId }}</label>
               <span>姓名：{{ patient.patientName }}</span>
             </div>
             <el-image
-              class="fu-container__image"
+              class="grid-item__image"
               fit="contain"
               :src="patient.previewLeft"
               :preview-teleported="true"
               :preview-src-list="[patient.previewLeft, patient.previewRight]">
               <template #error>
-                <div class="image-slot">左眼图片未上传</div>
+                <div class="grid-item__error">左眼图片未上传</div>
               </template>
             </el-image>
             <el-image
-              class="fu-container__image"
+              class="grid-item__image"
               fit="contain"
               :src="patient.previewRight"
               :preview-teleported="true"
               :preview-src-list="[patient.previewLeft, patient.previewRight]">
               <template #error>
-                <div class="image-slot">右眼图片未上传</div>
+                <div class="grid-item__error">右眼图片未上传</div>
               </template>
             </el-image>
           </div>
@@ -312,16 +290,16 @@
       // 批量提交逻辑
       const formData :FormData = new FormData()
       bulkList.value.forEach((item) => {
-        formData.append(item.patientId, item.leftFile as File)
-        formData.append(item.patientId, item.rightFile as File)
+        formData.append('files', item.leftFile as File)
+        formData.append('files', item.rightFile as File)
       })
       // console.log('批量提交数据:', formData)
       // TODO: 调用实际API接口
     } else {
       // 单个提交逻辑
       const formData :FormData = new FormData()
-      formData.append(query.value.patientId, singleList.value.leftFile as File)
-      formData.append(query.value.patientId, singleList.value.rightFile as File)
+      formData.append('files', singleList.value.leftFile as File)
+      formData.append('files', singleList.value.rightFile as File)
       // console.log('单个提交数据:',formData)
       // for (const [key, value] of formData.entries()) {
       //   console.log(key, value)

@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
 export const loginSchema = Joi.object({
-  id: Joi.string().trim().min(1).required().label('账号').messages({
+  userId: Joi.string().trim().min(1).required().label('账号').messages({
     'string.empty': '账号不能为空',
     'string.min': '账号至少需要1个字符',
     'any.required': '必须填写账号'

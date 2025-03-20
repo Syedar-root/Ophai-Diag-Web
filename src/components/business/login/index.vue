@@ -5,30 +5,26 @@
   import type { userDto } from '@/components/business/login/types.ts'
   import { loginService, registerService } from '@/api/login/index.ts'
   import { validate, loginSchema, registerSchema } from '@/util/validate'
-  import { useUserStore } from '@/store/user'
   import { useTokenStore } from '@/store/token'
 
-  const userStore = useUserStore()
   const tokenStore = useTokenStore()
 
   const query = ref<userDto>({
-    id: '',
+    userId: '',
     passwordHash: ''
   })
   const registerQuery = ref<userDto>({
     userName: '',
     passwordHash: '',
-    confirmPasswordHash: '',
+    confirmPassword: '',
     email: '',
     gender: '', // 性别改为空字符串
     phone: '', // 手机号改为空字符串
     realName: '',
     age: null, // 数值类型可以保持 null
     hospital: '',
-    department: '',
     position: '',
-    idCard: '',
-    proDoctorId: ''
+    idNumber: '',
   })
 
   // 登录流程
@@ -93,7 +89,7 @@
           <div class="login-content__form">
             <el-form>
               <el-form-item prop="username">
-                <el-input placeholder="请输入手机号/账号" v-model="query.id" :prefix-icon="User"></el-input>
+                <el-input placeholder="请输入账号" v-model="query.userId" :prefix-icon="User"></el-input>
               </el-form-item>
               <el-form-item prop="password">
                 <el-input
@@ -151,7 +147,7 @@
                 </el-col>
                 <el-col :span="12">
                   <el-form-item prop="idCard" label="身份证号" label-position="top">
-                    <el-input placeholder="请输入身份证号" v-model="registerQuery.idCard"></el-input>
+                    <el-input placeholder="请输入身份证号" v-model="registerQuery.idNumber"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -162,22 +158,10 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-              <el-row>
-                <el-col>
-                  <el-form-item prop="proDoctorId" label="执业医师证号" label-position="top">
-                    <el-input placeholder="请输入执业医师证号" v-model="registerQuery.proDoctorId"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
               <el-row :gutter="10">
                 <el-col :span="8">
                   <el-form-item prop="hospital" label="所属医院" label-position="top">
                     <el-input placeholder="请输入医院" v-model="registerQuery.hospital"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item prop="department" label="所属科室" label-position="top">
-                    <el-input placeholder="请输入科室" v-model="registerQuery.department"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="8">
@@ -200,7 +184,7 @@
                   <el-form-item prop="confirmPassword" label="确认密码" label-position="top">
                     <el-input
                       placeholder="请确认密码"
-                      v-model="registerQuery.confirmPasswordHash"
+                      v-model="registerQuery.confirmPassword"
                       type="password"
                       show-password></el-input>
                   </el-form-item>

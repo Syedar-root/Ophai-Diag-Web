@@ -9,11 +9,18 @@
   font-weight: bold;
 }
 
+@font-face {
+  font-family: 'MiSansVF';
+  src: url('../font/MiSans/MiSans VF.ttf') format('truetype');
+  font-weight: 100 900; /* 定义支持的字体权重范围 */
+  font-stretch: 75% 125%; /* 定义支持的宽度范围 */
+}
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: 'Microsoft YaHei', sans-serif;
+  font-family: 'MiSansVF', sans-serif;
   :deep(.el-button) {
     &:focus {
       outline: none;

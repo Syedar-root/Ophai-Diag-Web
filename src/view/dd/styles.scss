@@ -25,7 +25,7 @@ $border-color: map.get(vars.$colors, neutral-14);
     width: 100%;
     text-align: start;
     font-size: map.get(vars.$font-size, l);
-    font-weight: bold;
+    font-weight: map.get(vars.$font-weight,bolder);
     margin-bottom: map.get(vars.$space, m);
   }
 }
@@ -110,6 +110,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         width: 100%;
         text-align: start;
         font-size: map.get(vars.$font-size, s);
+        font-weight: map.get(vars.$font-weight,light);
         color: map.get(vars.$colors, neutral-3);
         margin-bottom: map.get(vars.$space, xxxs);
       }
@@ -118,7 +119,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         height: auto;
         text-align: start;
         font-size: map.get(vars.$font-size, m);
-        font-weight: 600;
+        font-weight: map.get(vars.$font-weight,normal);
         color: map.get(vars.$colors, neutral-1);
         margin-bottom: map.get(vars.$space, s);
         overflow-wrap: break-word; // 允许在任意字符间断行
@@ -142,7 +143,7 @@ $border-color: map.get(vars.$colors, neutral-14);
       margin: 0;
       text-align: start;
       font-size: map.get(vars.$font-size, m);
-      font-weight: bold;
+      font-weight: map.get(vars.$font-weight,bold);
     }
     &__content {
       position: relative;
@@ -192,12 +193,13 @@ $border-color: map.get(vars.$colors, neutral-14);
           width: 100%;
           text-align: start;
           font-size: map.get(vars.$font-size, m);
-          font-weight: 600;
+          font-weight: map.get(vars.$font-weight,normal);
         }
         .description {
           width: 100%;
           text-align: start;
           font-size: map.get(vars.$font-size, s);
+          font-weight: map.get(vars.$font-weight,light);
           color: map.get(vars.$colors, neutral-3);
           margin-top: map.get(vars.$space, xxxs);
         }
@@ -269,7 +271,10 @@ $border-color: map.get(vars.$colors, neutral-14);
         justify-content: space-between;
         font-size: map.get(vars.$font-size,m);
         label{
-          font-weight: bold;
+          font-weight: map.get(vars.$font-weight,bold);
+        }
+        span{
+          font-weight: map.get(vars.$font-weight,normal);
         }
       }
     }
@@ -290,14 +295,14 @@ $border-color: map.get(vars.$colors, neutral-14);
     width: 100%;
     height: auto;
     max-width: 100%;
-    //aspect-ratio: 1/1;
     object-fit: contain;
     border-radius: 0.5rem;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: map.get(vars.$space, xxxl);
-    .image-view__opt {
+
+    &__opt {
       position: absolute;
       z-index: 10;
       top: 0;
@@ -320,7 +325,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         justify-content: center;
         transition: all 0.3s;
         cursor: pointer;
-        .opt-item__inner{
+        &__inner{
           font-size: map.get(vars.$font-size,s);
         }
         &:hover{
@@ -333,7 +338,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         }
       }
     }
-    .img {
+    &__content {
       width: 50%;
       //aspect-ratio: 1/1;
       object-fit: contain;
@@ -349,11 +354,11 @@ $border-color: map.get(vars.$colors, neutral-14);
     align-items: start;
     justify-content: center;
 
-    .title {
+    &__title {
       width: 100%;
       display: flex;
       font-size: map.get(vars.$font-size, l);
-      font-weight: bold;
+      font-weight: map.get(vars.$font-weight,bolder);
       margin-bottom: map.get(vars.$space, m);
       gap: map.get(vars.$space, xxxl);
       span{
@@ -361,7 +366,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         text-align: start;
       }
     }
-    .ai-diag-area__content {
+    &__content {
       position: relative;
       width: 100%;
       height: 100%;
@@ -377,7 +382,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         align-items: center;
         gap: map.get(vars.$space, m);
 
-        .diag-item {
+        .diag-content {
           position: relative;
           width: 100%;
           height: auto;
@@ -387,17 +392,16 @@ $border-color: map.get(vars.$colors, neutral-14);
           align-items: start;
           @include card;
 
-          .title {
+          &__title {
             position: relative;
             width: 100%;
             font-size: map.get(vars.$font-size, m);
-            font-weight: 500;
+            font-weight: map.get(vars.$font-weight,bold);
             text-align: start;
             margin: 0 0 map.get(vars.$space, xxs) 0;
             border-bottom: 1px solid $border-color;
           }
-
-          .find-item {
+          &__find-item {
             width: 100%;
             display: flex;
             justify-content: start;
@@ -412,6 +416,7 @@ $border-color: map.get(vars.$colors, neutral-14);
             .info {
               text-align: start;
               text-wrap: wrap;
+              font-weight: map.get(vars.$font-weight,normal);
             }
           }
         }
@@ -424,8 +429,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         flex-direction: row;
         justify-content: center;
         align-items: start;
-
-       .chart-item {
+       .chart-content {
           position: relative;
           width: 100%;
           aspect-ratio: 1/1;
@@ -442,14 +446,6 @@ $border-color: map.get(vars.$colors, neutral-14);
   display: flex;
   flex-direction: column;
   justify-content: start;
-
-  .title {
-    width: 100%;
-    text-align: start;
-    font-size: map.get(vars.$font-size, l);
-    font-weight: 600;
-    margin-bottom: map.get(vars.$space, m);
-  }
   .report-container {
     width: 100%;
     height: auto;
@@ -458,6 +454,14 @@ $border-color: map.get(vars.$colors, neutral-14);
     justify-content: center;
     align-items: center;
     gap: map.get(vars.$space, s);
+
+    &__title {
+      width: 100%;
+      text-align: start;
+      font-size: map.get(vars.$font-size, l);
+      font-weight: map.get(vars.$font-weight,bolder);
+      margin-bottom: map.get(vars.$space, m);
+    }
 
     .report-item {
       position: relative;
@@ -470,13 +474,13 @@ $border-color: map.get(vars.$colors, neutral-14);
       @include card;
       padding-left: 0;
       padding-right: 0;
-      .report-item__title {
+      &__title {
         width: 100%;
         display: flex;
         justify-content: start;
         align-items: center;
         font-size: map.get(vars.$font-size, m);
-        font-weight: bold;
+        font-weight: map.get(vars.$font-weight,bold);
         border-bottom: 1px solid $border-color;
         margin-bottom: map.get(vars.$space, s);
         span {
@@ -485,7 +489,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         }
 
       }
-      .report-item__content {
+      &__content {
         width: 100%;
         height: auto;
         text-align: start;
@@ -497,44 +501,47 @@ $border-color: map.get(vars.$colors, neutral-14);
         font-size: map.get(vars.$font-size, s);
         padding-left: map.get(vars.$space, l);
         padding-right: map.get(vars.$space, l);
-
-        .report-content__line{
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-        }
+      }
+      &__line{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
         label {
           color: map.get(vars.$colors, neutral-3);
-          font-weight: bold;
+          font-weight: map.get(vars.$font-weight,normal);
         }
         span {
           color: map.get(vars.$colors, neutral-1);
+          font-weight: map.get(vars.$font-weight,light);
         }
       }
-
-      &.conclusion{
-        height: 200px;
-        max-height: 200px;
-        .report-item__content {
-          height: 100%;
-          :deep(textarea){
-            overflow: auto;
-          }
-        }
-      }
-      &.history-diag{
-        max-height: 300px;
+    }
+    .history-diag{
+      max-height: 300px;
+      overflow: auto;
+      &__content {
         overflow: auto;
-        .report-item__content {
-           overflow: auto;
-          .history-content-item{
-            .doctor-name{
-                height: 30px;
-                font-weight: bolder;
-                font-size: map.get(vars.$font-size,m);
-                padding: 0;
-            }
-          }
+      }
+      &__item{
+        .doctor-name{
+          height: 30px;
+          font-weight: map.get(vars.$font-weight,bold);
+          font-size: map.get(vars.$font-size,m);
+          padding: 0;
+        }
+        .ex-conclusion{
+          font-weight: map.get(vars.$font-weight,normal);
+        }
+      }
+    }
+    .conclusion{
+      height: 200px;
+      max-height: 200px;
+      .report-item__content {
+        height: 100%;
+        :deep(textarea){
+          overflow: auto;
+          font-weight: map.get(vars.$font-weight,normal);
         }
       }
     }
@@ -543,12 +550,11 @@ $border-color: map.get(vars.$colors, neutral-14);
       display: flex;
       justify-content: space-between;
       align-items: center;
-
-      .save {
+      &__save {
         width: 100%;
         @include resetElement.resetButton();
       }
-      .export {
+      &__export {
         width: 100%;
         @include resetElement.resetButton($type: 'info');
       }

@@ -9,7 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BarChart: typeof import('./components/common/barChart/index.vue')['default']
-    Echart: typeof import('./components/common/echart/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -19,7 +18,6 @@ declare module 'vue' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
-    ElInputTag: typeof import('element-plus/es')['ElInputTag']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']

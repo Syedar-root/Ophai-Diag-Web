@@ -1,22 +1,33 @@
 @use 'sass:map';
 @use './vars.scss' as vars;
 
-@mixin resetInput() {
-  //--el-input-border-color: #{map.get(vars.$colors, neutral-7)};
-  //--el-input-hover-border-color: #{map.get(vars.$colors, neutral-5)};
-  //--el-input-focus-border-color: #{map.get(vars.$colors, primary)};
-  //--el-input-disabled-border-color: #{map.get(vars.$colors, neutral-2)};
-  //--el-input-disabled-background-color: #{map.get(vars.$colors, neutral-1)};
-}
 
 @mixin resetButton($type: primary) {
-  border-radius: 0.5rem;
-  //background-color: map.get(vars.$colors, $type);
+  outline: none;
   &:hover {
     background-color: map.get(vars.$colors, #{$type}-dark-1);
+    border-color: map.get(vars.$colors, #{$type}-dark-1);
   }
 }
 
 @mixin resetSelect() {
   border-radius: 0.5rem;
 }
+
+$types:(
+  primary,
+  success,
+  warning,
+  info,
+  danger,
+);
+
+body {
+    @each $type in $types {
+    .el-button--#{$type} {
+      @include resetButton($type);
+    }
+  }
+}
+
+

@@ -82,22 +82,21 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
     <div v-if="!isEmpty" class="dd-container__center">
       <div class="image-view">
-        <el-image class="img" :src="imgUrl[0]" :preview-src-list="imgUrl" fit="contain" hide-on-click-modal>
+        <el-image class="image-view__content" :src="imgUrl[0]" :preview-src-list="imgUrl" fit="contain" hide-on-click-modal>
           <template #error>
-            <div class="image-slot">
+            <div class="image-view__error">
               <el-icon size="1.5rem"><Picture /></el-icon>
             </div>
           </template>
         </el-image>
-        <el-image class="img detailImg" :src="imgUrl[detailImgIndex]" :preview-src-list="imgUrl" fit="contain" hide-on-click-modal>
+        <el-image class="image-view__content detailImg" :src="imgUrl[detailImgIndex]" :preview-src-list="imgUrl" fit="contain" hide-on-click-modal>
           <template #error>
-            <div class="image-slot">
+            <div class="image-view__error">
               <el-icon size="1.5rem"><Picture /></el-icon>
             </div>
           </template>
@@ -127,25 +126,25 @@
         </div>
       </div>
       <div class="ai-diag-area">
-        <span class="title">
+        <span class="ai-diag-area__title">
           <span>AI诊断</span>
           <span>各疾病患病概率</span>
         </span>
         <div class="ai-diag-area__content">
           <div class="diag">
-            <div class="finding diag-item">
-              <span class="title">主要发现</span>
-              <div class="find-item" v-for="(item, index) in findList" :key="index">
+            <div class="finding diag-content">
+              <span class="diag-content__title">主要发现</span>
+              <div class="diag-content__find-item" v-for="(item, index) in findList" :key="index">
                 <div class="point" :class="[{ [`is-${item.severity}`]: item.severity }]"></div>
                 <div class="info">{{ item.info }}</div>
               </div>
             </div>
           </div>
           <div class="chart">
-            <div class="chart-item">
+            <div class="chart-content">
               <v-chart :option="allOptions" autoresize></v-chart>
             </div>
-            <div class="chart-item">
+            <div class="chart-content">
               <v-chart :option="partOptions" autoresize></v-chart>
             </div>
           </div>
@@ -154,22 +153,22 @@
     </div>
 
     <div v-if="!isEmpty" class="dd-container__right">
-      <div class="title">诊断报告</div>
       <div class="report-container">
+        <div class="report-container__title">诊断报告</div>
         <div class="report-item">
           <div class="report-item__title">
             <span>基本信息</span>
           </div>
           <div class="report-item__content">
-            <div class="report-content__line">
+            <div class="report-item__line">
               <label>检查日期</label>
               <span>1111</span>
             </div>
-            <div class="report-content__line">
+            <div class="report-item__line">
               <label>检查医师</label>
               <span>1111</span>
             </div>
-            <div class="report-content__line">
+            <div class="report-item__line">
               <label>检查日期</label>
               <span>1111</span>
             </div>
@@ -179,22 +178,22 @@
           <div class="report-item__title">
             <span>历史诊断</span>
           </div>
-          <div class="report-item__content">
-            <div class="history-content-item">
+          <div class="report-item__content history-diag__content">
+            <div class="history-diag__item">
               <div class="doctor-name">
                 <span>王德民</span>
               </div>
-              <div class="conclusion">
+              <div class="ex-conclusion">
                   建议进行荧光血管造影检查，结合
                   患者年龄和症状表现，需要排除早
                   期糖尿病性视网膜病变的可能。
               </div>
             </div>
-            <div class="history-content-item">
+            <div class="history-diag__item">
               <div class="doctor-name">
                 <span>王德民</span>
               </div>
-              <div class="conclusion">
+              <div class="ex-conclusion">
                 建议进行荧光血管造影检查，结合
                 患者年龄和症状表现，需要排除早
                 期糖尿病性视网膜病变的可能。
@@ -211,8 +210,8 @@
           </div>
         </div>
         <div class="report-opt">
-          <el-button class="save" type="primary">保存</el-button>
-          <el-button class="export" type="info">导出PDF</el-button>
+          <el-button class="report-opt__save" type="primary">保存</el-button>
+          <el-button class="report-opt__export" type="info">导出PDF</el-button>
         </div>
       </div>
     </div>
