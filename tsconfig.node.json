@@ -8,10 +8,12 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    //    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "composite": true, // 新增此配置
+    "noEmit": false, // 必须允许emit
+    "allowImportingTsExtensions": false, // 禁用该选项
 
     /* Linting */
     "strict": true,

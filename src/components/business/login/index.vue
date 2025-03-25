@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Key, User } from '@element-plus/icons-vue'
-  import logo from '@/assets/logo/logo.svg'
+  import logo from '@/assets/logo/logo.svg?url'
   import type { userDto } from '@/components/business/login/types.ts'
   import { loginService, registerService } from '@/api/login/index.ts'
   import { validate, loginSchema, registerSchema } from '@/util/validate'
@@ -24,18 +24,24 @@
     age: null, // 数值类型可以保持 null
     hospital: '',
     position: '',
-    idNumber: '',
+    idNumber: ''
   })
 
   // 登录流程
   const handleLogin = async () => {
     try {
+      console.log(query.value)
       //   验证参数
       await validate(query.value, loginSchema)
+    } catch (error) {
+      console.error(error)
+      return
+    }
+    try {
       //   登录
       await loginService(query.value).then((data: any) => {
-        console.log(data)
-        tokenStore.setToken(data.token)
+        tokenStore.setToken(data)
+        loginShow.value = false
       })
     } catch (error) {
       console.error(error)
@@ -49,8 +55,8 @@
       //   验证参数
       await validate(registerQuery.value, registerSchema)
       //   注册
-      await registerService(registerQuery.value).then((data: any) => {
-        console.log(data)
+      await registerService(registerQuery.value).then(() => {
+        // console.log(data)
         registerShow.value = false
         loginShow.value = true
       })

@@ -11,14 +11,14 @@
       </router-view>
     </div>
     <transition name="fade">
-      <Login v-show="false" @containerClick="handleLoginShow" @click.stop></Login>
+      <Login v-show="loginShow" @containerClick="handleLoginShow" @click.stop></Login>
     </transition>
   </div>
 </template>
 <script setup lang="ts">
   import Nav from '../components/business/nav/index.vue'
   import Login from '../components/business/login/index.vue'
-  import { ref } from 'vue'
+  import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
   import { useUserStore } from '@/store/user'
   import { useTokenStore } from '@/store/token'
 
@@ -41,7 +41,7 @@
   onMounted(() => {
     // console.log(import.meta.env.MODE)
     // console.log(import.meta.env.VITE_API_BASE_URL)
-    if (tokenStore.isTokenExpired()) {
+    if (tokenStore.token === null) {
       layoutContainer.value?.addEventListener('click', handleContainerClick)
     }
   })
@@ -55,7 +55,7 @@
   watch(
     () => tokenStore.expire,
     () => {
-      if (!tokenStore.isTokenExpired()) {
+      if (tokenStore.token !== null) {
         layoutContainer.value?.removeEventListener('click', handleContainerClick)
         loginShow.value = false
       } else {
@@ -65,7 +65,8 @@
   )
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  $headerHeight: clamp(64px, 5vh, 104px);
   .layout-container {
     position: relative;
     width: 100%;
@@ -79,7 +80,7 @@
   .layout__header {
     position: relative;
     width: 100%;
-    height: clamp(64px, 5vh, 104px);
+    height: $headerHeight;
     min-height: 64px;
     border-bottom: 1px solid #ccc;
   }
@@ -87,8 +88,7 @@
   .layout__main {
     position: relative;
     width: 100%;
-    flex-grow: 1;
-    max-height: 99%;
+    height: calc(100vh - $headerHeight);
   }
 
   .fade-enter-active,

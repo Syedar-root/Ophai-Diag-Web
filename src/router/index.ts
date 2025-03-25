@@ -23,7 +23,8 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'dd/:id?',
         name: 'Diseasediagnosis',
-        component: () => import('../view/dd/index.vue')
+        component: () => import('../view/dd/index.vue'),
+        props: true
       }
     ]
   },

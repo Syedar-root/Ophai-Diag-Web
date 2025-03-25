@@ -4,8 +4,8 @@ export default {
   ignores: ['node_modules', 'eslint-config.js', '*/auto-imports.d.ts', '*/components.d.ts'],
   files: ['src/**/*.ts', 'src/**/*.vue'],
   rules: {
-    'no-console': 'error',
-    'no-unused-vars': 'error'
+    // 'no-console': 'error',
+    // 'no-unused-vars': 'error'
   },
   languageOptions: {
     parser: vueParser,

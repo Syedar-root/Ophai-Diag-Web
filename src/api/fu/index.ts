@@ -1,14 +1,14 @@
 import request from '@/util/request'
 import type { CustomAxiosRequestConfig } from '@/util/request'
 
-export const createCaseService = (query:any) =>{
+export const uploadCaseService = (query: any) => {
   return request({
     url: '/api/preImage/saveAndProcess',
     method: 'post',
     data: query,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    },
-    noToken: false
-  })
+    noToken: true
+    // headers: {
+    //   'Content-Type': 'multipart/form-data',
+    // }
+  } as CustomAxiosRequestConfig)
 }

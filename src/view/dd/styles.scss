@@ -12,7 +12,6 @@ $container-padding: map.get(vars.$space, xxl);
 $container-background-color: map.get(vars.$colors, _white);
 $border-color: map.get(vars.$colors, neutral-14);
 
-
 @mixin left-area {
   width: 100%;
   height: auto;
@@ -25,7 +24,7 @@ $border-color: map.get(vars.$colors, neutral-14);
     width: 100%;
     text-align: start;
     font-size: map.get(vars.$font-size, l);
-    font-weight: map.get(vars.$font-weight,bolder);
+    font-weight: map.get(vars.$font-weight, bolder);
     margin-bottom: map.get(vars.$space, m);
   }
 }
@@ -53,7 +52,7 @@ $border-color: map.get(vars.$colors, neutral-14);
   flex-direction: row;
   background-color: $container-background-color;
 
-  &__left, {
+  &__left {
     width: 25%;
     position: relative;
     flex-grow: 1;
@@ -83,7 +82,6 @@ $border-color: map.get(vars.$colors, neutral-14);
   }
 }
 
-
 /**
  * 左侧患者信息区域
  * ============================================================================
@@ -110,7 +108,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         width: 100%;
         text-align: start;
         font-size: map.get(vars.$font-size, s);
-        font-weight: map.get(vars.$font-weight,light);
+        font-weight: map.get(vars.$font-weight, light);
         color: map.get(vars.$colors, neutral-3);
         margin-bottom: map.get(vars.$space, xxxs);
       }
@@ -119,7 +117,7 @@ $border-color: map.get(vars.$colors, neutral-14);
         height: auto;
         text-align: start;
         font-size: map.get(vars.$font-size, m);
-        font-weight: map.get(vars.$font-weight,normal);
+        font-weight: map.get(vars.$font-weight, normal);
         color: map.get(vars.$colors, neutral-1);
         margin-bottom: map.get(vars.$space, s);
         overflow-wrap: break-word; // 允许在任意字符间断行
@@ -128,7 +126,6 @@ $border-color: map.get(vars.$colors, neutral-14);
       }
     }
   }
-
 
   .patient-history-case {
     position: relative;
@@ -143,7 +140,7 @@ $border-color: map.get(vars.$colors, neutral-14);
       margin: 0;
       text-align: start;
       font-size: map.get(vars.$font-size, m);
-      font-weight: map.get(vars.$font-weight,bold);
+      font-weight: map.get(vars.$font-weight, bold);
     }
     &__content {
       position: relative;
@@ -172,12 +169,12 @@ $border-color: map.get(vars.$colors, neutral-14);
         height: 100%;
         border-radius: 0.5rem;
         transition: all 0.2s ease-in-out;
-        transform: scale(0,1);
+        transform: scale(0, 1);
       }
       &:hover {
         &::before {
           background-color: map.get(vars.$colors, neutral-14);
-          transform: scale(1.1,1);
+          transform: scale(1.1, 1);
         }
       }
       .point {
@@ -193,13 +190,13 @@ $border-color: map.get(vars.$colors, neutral-14);
           width: 100%;
           text-align: start;
           font-size: map.get(vars.$font-size, m);
-          font-weight: map.get(vars.$font-weight,normal);
+          font-weight: map.get(vars.$font-weight, normal);
         }
         .description {
           width: 100%;
           text-align: start;
           font-size: map.get(vars.$font-size, s);
-          font-weight: map.get(vars.$font-weight,light);
+          font-weight: map.get(vars.$font-weight, light);
           color: map.get(vars.$colors, neutral-3);
           margin-top: map.get(vars.$space, xxxs);
         }
@@ -229,9 +226,9 @@ $border-color: map.get(vars.$colors, neutral-14);
     justify-content: start;
     align-items: center;
     @include card;
-    gap: map.get(vars.$space,m);
+    gap: map.get(vars.$space, m);
 
-    .images{
+    .images {
       width: 100%;
       height: auto;
       display: flex;
@@ -249,44 +246,54 @@ $border-color: map.get(vars.$colors, neutral-14);
           box-shadow: 0 0 10px 5px rgba(map.get(vars.$colors, primary-light-5), 0.8);
           transform: scale(0.85);
         }
-        img {
+        .img {
           position: relative;
           width: 100%;
           height: 100%;
           object-fit: contain;
           border-radius: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &__error {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: map.get(vars.$space, xs);
+          }
         }
       }
     }
-    .image-info{
+    .image-info {
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: start;
       align-items: start;
-      gap: map.get(vars.$space,s);
-      &__item{
+      gap: map.get(vars.$space, s);
+      &__item {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        font-size: map.get(vars.$font-size,m);
-        label{
-          font-weight: map.get(vars.$font-weight,bold);
+        font-size: map.get(vars.$font-size, m);
+        label {
+          font-weight: map.get(vars.$font-weight, bold);
         }
-        span{
-          font-weight: map.get(vars.$font-weight,normal);
+        span {
+          font-weight: map.get(vars.$font-weight, normal);
         }
       }
     }
   }
-
-
 }
 
 .dd-container__center {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: start;
   $gap: map.get(vars.$space, l);
   gap: $gap;
 
@@ -313,11 +320,11 @@ $border-color: map.get(vars.$colors, neutral-14);
       align-items: center;
       gap: map.get(vars.$space, xs);
       transition: all 0.3s ease;
-      .opt-item{
+      .opt-item {
         width: 100%;
         aspect-ratio: 1/1;
-        background-color: map.get(vars.$colors,_white);
-        padding: map.get(vars.$space,xs);
+        background-color: map.get(vars.$colors, _white);
+        padding: map.get(vars.$space, xs);
         border-radius: 0.5rem;
         display: flex;
         flex-direction: column;
@@ -325,43 +332,61 @@ $border-color: map.get(vars.$colors, neutral-14);
         justify-content: center;
         transition: all 0.3s;
         cursor: pointer;
-        &__inner{
-          font-size: map.get(vars.$font-size,s);
+        &__inner {
+          font-size: map.get(vars.$font-size, s);
         }
-        &:hover{
-          box-shadow: 0 0 0 1px map.get(vars.$colors,neutral-14) inset;
+        &:hover {
+          box-shadow: 0 0 0 1px map.get(vars.$colors, neutral-14) inset;
         }
-        &.active{
-          background-color: map.get(vars.$colors,primary-light-3);
+        &.active {
+          background-color: map.get(vars.$colors, primary-light-3);
           color: #fff;
-          box-shadow: 0 0 0 1px map.get(vars.$colors,primary-light-3) inset;
+          box-shadow: 0 0 0 1px map.get(vars.$colors, primary-light-3) inset;
         }
       }
     }
     &__content {
+      position: relative;
       width: 50%;
-      //aspect-ratio: 1/1;
+      max-width: 50%;
+      aspect-ratio: 1/1;
       object-fit: contain;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: map.get(vars.$colors, neutral-14);
+    }
+    &__error {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: map.get(vars.$space, s);
     }
   }
 
   .ai-diag-area {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: fit-content;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      opacity: 0;
+    }
 
     &__title {
       width: 100%;
       display: flex;
       font-size: map.get(vars.$font-size, l);
-      font-weight: map.get(vars.$font-weight,bolder);
+      font-weight: map.get(vars.$font-weight, bolder);
       margin-bottom: map.get(vars.$space, m);
       gap: map.get(vars.$space, xxxl);
-      span{
+      span {
         width: 50%;
         text-align: start;
       }
@@ -372,11 +397,12 @@ $border-color: map.get(vars.$colors, neutral-14);
       height: 100%;
       display: flex;
       gap: map.get(vars.$space, xxxl);
+      padding-bottom: map.get(vars.$space, l);
 
       .diag {
         position: relative;
         width: 50%;
-        max-height: 40%;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -385,18 +411,18 @@ $border-color: map.get(vars.$colors, neutral-14);
         .diag-content {
           position: relative;
           width: 100%;
-          height: auto;
           display: flex;
           flex-direction: column;
           justify-content: start;
           align-items: start;
           @include card;
+          padding: map.get(vars.$space, s);
 
           &__title {
             position: relative;
             width: 100%;
             font-size: map.get(vars.$font-size, m);
-            font-weight: map.get(vars.$font-weight,bold);
+            font-weight: map.get(vars.$font-weight, bold);
             text-align: start;
             margin: 0 0 map.get(vars.$space, xxs) 0;
             border-bottom: 1px solid $border-color;
@@ -416,7 +442,11 @@ $border-color: map.get(vars.$colors, neutral-14);
             .info {
               text-align: start;
               text-wrap: wrap;
-              font-weight: map.get(vars.$font-weight,normal);
+              font-weight: map.get(vars.$font-weight, normal);
+              font-size: map.get(vars.$font-size, m);
+            }
+            .func-info {
+              font-weight: map.get(vars.$font-weight, bold);
             }
           }
         }
@@ -429,14 +459,14 @@ $border-color: map.get(vars.$colors, neutral-14);
         flex-direction: row;
         justify-content: center;
         align-items: start;
-       .chart-content {
+        .chart-content {
           position: relative;
           width: 100%;
           aspect-ratio: 1/1;
           display: flex;
           justify-content: center;
           align-items: start;
-       }
+        }
       }
     }
   }
@@ -446,6 +476,11 @@ $border-color: map.get(vars.$colors, neutral-14);
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-items: center;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    opacity: 0;
+  }
   .report-container {
     width: 100%;
     height: auto;
@@ -459,8 +494,8 @@ $border-color: map.get(vars.$colors, neutral-14);
       width: 100%;
       text-align: start;
       font-size: map.get(vars.$font-size, l);
-      font-weight: map.get(vars.$font-weight,bolder);
-      margin-bottom: map.get(vars.$space, m);
+      font-weight: map.get(vars.$font-weight, bolder);
+      margin-bottom: map.get(vars.$space, xxs);
     }
 
     .report-item {
@@ -480,14 +515,13 @@ $border-color: map.get(vars.$colors, neutral-14);
         justify-content: start;
         align-items: center;
         font-size: map.get(vars.$font-size, m);
-        font-weight: map.get(vars.$font-weight,bold);
+        font-weight: map.get(vars.$font-weight, bold);
         border-bottom: 1px solid $border-color;
         margin-bottom: map.get(vars.$space, s);
         span {
           margin-left: map.get(vars.$space, l);
-          margin-bottom: map.get(vars.$space,xs);
+          margin-bottom: map.get(vars.$space, xs);
         }
-
       }
       &__content {
         width: 100%;
@@ -502,46 +536,55 @@ $border-color: map.get(vars.$colors, neutral-14);
         padding-left: map.get(vars.$space, l);
         padding-right: map.get(vars.$space, l);
       }
-      &__line{
+      &__line {
         width: 100%;
         display: flex;
         justify-content: space-between;
         label {
           color: map.get(vars.$colors, neutral-3);
-          font-weight: map.get(vars.$font-weight,normal);
+          font-weight: map.get(vars.$font-weight, normal);
         }
         span {
           color: map.get(vars.$colors, neutral-1);
-          font-weight: map.get(vars.$font-weight,light);
+          font-weight: map.get(vars.$font-weight, light);
         }
       }
     }
-    .history-diag{
+    .history-diag {
+      height: auto;
+      flex-shrink: 0;
       max-height: 300px;
       overflow: auto;
+      &::-webkit-scrollbar {
+        opacity: 0;
+      }
       &__content {
         overflow: auto;
       }
-      &__item{
-        .doctor-name{
+      &__item {
+        .doctor-name {
           height: 30px;
-          font-weight: map.get(vars.$font-weight,bold);
-          font-size: map.get(vars.$font-size,m);
+          font-weight: map.get(vars.$font-weight, bold);
+          font-size: map.get(vars.$font-size, m);
           padding: 0;
         }
-        .ex-conclusion{
-          font-weight: map.get(vars.$font-weight,normal);
+        .ex-conclusion {
+          font-weight: map.get(vars.$font-weight, normal);
         }
       }
     }
-    .conclusion{
-      height: 200px;
-      max-height: 200px;
+    .conclusion {
+      height: auto;
       .report-item__content {
+        position: relative;
         height: 100%;
-        :deep(textarea){
+        :deep(textarea) {
           overflow: auto;
-          font-weight: map.get(vars.$font-weight,normal);
+          font-weight: map.get(vars.$font-weight, normal);
+        }
+        .el-select {
+          position: relative;
+          width: 100%;
         }
       }
     }

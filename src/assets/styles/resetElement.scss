@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use './vars.scss' as vars;
 
-
 @mixin resetButton($type: primary) {
   outline: none;
   &:hover {
@@ -14,20 +13,12 @@
   border-radius: 0.5rem;
 }
 
-$types:(
-  primary,
-  success,
-  warning,
-  info,
-  danger,
-);
+$types: (primary, success, warning, info, danger);
 
 body {
-    @each $type in $types {
+  @each $type in $types {
     .el-button--#{$type} {
       @include resetButton($type);
     }
   }
 }
-
-

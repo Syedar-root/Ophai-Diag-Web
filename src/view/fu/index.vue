@@ -61,11 +61,7 @@
             </div>
             <div class="image-item">
               <span>原始图像</span>
-              <el-image
-                class="image-item__image"
-                fit="contain"
-                :preview-src-list="srcList"
-                :src="singleList.rawLeft">
+              <el-image class="image-item__image" fit="contain" :preview-src-list="srcList" :src="singleList.rawLeft">
                 <template #error>
                   <div class="image-item__error">
                     <el-icon size="1.5rem"><Picture /></el-icon>
@@ -80,11 +76,7 @@
             </div>
             <div class="image-item">
               <span>原始图像</span>
-              <el-image
-                class="image-item__image"
-                fit="contain"
-                :preview-src-list="srcList"
-                :src="singleList.rawRight">
+              <el-image class="image-item__image" fit="contain" :preview-src-list="srcList" :src="singleList.rawRight">
                 <template #error>
                   <div class="image-item__error">
                     <el-icon size="1.5rem"><Picture /></el-icon>
@@ -136,10 +128,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted, computed } from 'vue'
+  import { ref, onMounted, computed, onUnmounted } from 'vue'
   import type { ffDTO, BulkImage } from '@/view/fu/types.ts'
   import { Picture, UploadFilled } from '@element-plus/icons-vue'
   import { validate, imageSchema } from '@/util/validate'
+  import { uploadCaseService } from '@/api/fu/index.ts'
 
   const footerShow = ref<boolean>(false)
   const bulkUpload = ref<boolean>(false)
@@ -151,7 +144,7 @@
   })
   onMounted(() => {
     document.addEventListener('mousemove', e => {
-      footerShow.value = e.y > window.innerHeight / 1.5;
+      footerShow.value = e.y > window.innerHeight / 1.5
     })
   })
 
@@ -162,7 +155,7 @@
     rawLeft: '',
     rawRight: '',
     leftFile: null,
-    rightFile: null,
+    rightFile: null
   })
 
   const updatePreviewImages = async (uploadFiles: any[]) => {
@@ -195,7 +188,7 @@
         await validate({ name: fileName }, imageSchema)
 
         // 解析患者ID和眼睛类型
-        const [patientId, patientName,eyeType] = fileName.split('_')
+        const [patientId, patientName, eyeType] = fileName.split('_')
         const upperPatientId = patientId.toUpperCase()
 
         // 批量模式处理
@@ -233,7 +226,7 @@
       // 生成批量模式预览数据
       // 转换Map到bulkList（保证唯一性）
       if (bulkUpload.value) {
-        bulkList.value = Array.from(patientMap, ([patientId,files]) => ({
+        bulkList.value = Array.from(patientMap, ([patientId, files]) => ({
           patientId,
           patientName: files.patientName || '',
           leftFile: files.left || null,
@@ -285,11 +278,11 @@
 
   // 修改提交处理函数
   const handleSubmit = () => {
-    // console.log(bulkList.value[0].leftFile)
+    const formData: FormData = new FormData()
     if (bulkUpload.value) {
       // 批量提交逻辑
-      const formData :FormData = new FormData()
-      bulkList.value.forEach((item) => {
+
+      bulkList.value.forEach(item => {
         formData.append('files', item.leftFile as File)
         formData.append('files', item.rightFile as File)
       })
@@ -297,7 +290,6 @@
       // TODO: 调用实际API接口
     } else {
       // 单个提交逻辑
-      const formData :FormData = new FormData()
       formData.append('files', singleList.value.leftFile as File)
       formData.append('files', singleList.value.rightFile as File)
       // console.log('单个提交数据:',formData)
@@ -306,6 +298,14 @@
       // }
       // TODO: 调用实际API接口
     }
+
+    uploadCaseService(formData)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 </script>
 

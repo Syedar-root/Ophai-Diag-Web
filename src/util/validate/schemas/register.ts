@@ -9,18 +9,13 @@ export const registerSchema = Joi.object({
     .required()
     .label('密码')
     .messages({
-    'string.empty': '密码不能为空',
-    'string.min': '密码至少需要6位',
-      'string.max':'密码最多有16位',
+      'string.empty': '密码不能为空',
+      'string.min': '密码至少需要6位',
+      'string.max': '密码最多有16位',
       'string.pattern.base': '密码必须包含数字、大小写，可以包含特殊符号，不包含空格',
-    'any.required': '必须填写密码',
-
-  }),
-  confirmPasswordHash: Joi.string()
-    .valid(Joi.ref('passwordHash'))
-    .required()
-    .label('确认密码')
-    .messages({
+      'any.required': '必须填写密码'
+    }),
+  confirmPasswordHash: Joi.string().valid(Joi.ref('passwordHash')).required().label('确认密码').messages({
     'string.empty': '确认密码不能为空',
     'any.only': '两次输入密码不一致',
     'any.required': '请再次输入密码确认'
@@ -33,11 +28,11 @@ export const registerSchema = Joi.object({
     .required()
     .label('用户名')
     .messages({
-    'string.empty': '用户名不能为空',
-    'string.min': '用户名至少需要2个中文字符',
-    'any.required': '必须填写用户名',
-      'string.pattern.base':'至少需要两个中文字符'
-  }),
+      'string.empty': '用户名不能为空',
+      'string.min': '用户名至少需要2个中文字符',
+      'any.required': '必须填写用户名',
+      'string.pattern.base': '至少需要两个中文字符'
+    }),
   email: Joi.string()
     .trim()
     .required()
@@ -46,7 +41,7 @@ export const registerSchema = Joi.object({
     .messages({
       'string.empty': '邮箱不能为空',
       'any.required': '必须填写邮箱',
-      'string.pattern.base':'请输入有效的邮箱'
+      'string.pattern.base': '请输入有效的邮箱'
     }),
   phone: Joi.string()
     .trim()
@@ -55,13 +50,9 @@ export const registerSchema = Joi.object({
     .messages({
       'string.pattern.base': '请输入有效的手机号'
     }),
-  gender: Joi.string()
-  .trim()
-  .required()
-    .label('性别')
-    .messages({
-      'any.required':'性别不能为空'
-    }),
+  gender: Joi.string().trim().required().label('性别').messages({
+    'any.required': '性别不能为空'
+  }),
   /* 身份证号验证
     [1-9]                // 首位不能为0
     \d{5}                // 前6位：行政区划代码（省/市/县）
@@ -72,12 +63,11 @@ export const registerSchema = Joi.object({
     [0-9X]               // 校验码：0-9或X（罗马数字10）
    */
   idNumber: Joi.string()
-  .trim()
-  .required()
+    .trim()
+    .required()
     .label('身份证号')
     .pattern(/^[1-9]\d{5}(19|20)\d{2}(0[1-9]|1[0-2])[0-9]{2}\d{3}[0-9X]$/)
-  .messages({
-    'string.pattern.base':'请输入有效的身份证号'
-  })
-
+    .messages({
+      'string.pattern.base': '请输入有效的身份证号'
+    })
 })

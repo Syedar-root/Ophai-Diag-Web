@@ -50,7 +50,7 @@
       width: 100%;
       height: 100%;
       font-size: map.get(vars.$font-size, m);
-      font-weight: map.get(vars.$font-weight,normal);
+      font-weight: map.get(vars.$font-weight, normal);
       background: linear-gradient(to right, $color, $color) no-repeat right bottom;
       background-size: 0 2px;
       transition-duration: 0.3s;
@@ -70,7 +70,7 @@
         color: $color;
         background: linear-gradient(to right, $color, $color) no-repeat left bottom;
         background-size: 100% 2px;
-        font-weight: map.get(vars.$font-weight,bold);
+        font-weight: map.get(vars.$font-weight, bold);
       }
     }
   }

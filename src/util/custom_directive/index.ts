@@ -1,12 +1,13 @@
 // 在文件顶部添加类型声明
 declare global {
   interface HTMLElement {
-      _routeHandler: () => void
+    _routeHandler: () => void
   }
 }
 
 import type { App } from 'vue'
 import router from '../../router'
+import type { Directive } from 'vue' // 添加类型导入
 
 export const routeDirective = {
   mounted(el: HTMLElement, binding: { value: string }) {
@@ -26,7 +27,7 @@ export const routeDirective = {
       el.removeEventListener('click', el._routeHandler)
     }
   }
-} as Directive<HTMLElement,string>
+} as Directive<HTMLElement, string>
 
 export function setupDirectives(app: App) {
   app.directive('route', routeDirective)
