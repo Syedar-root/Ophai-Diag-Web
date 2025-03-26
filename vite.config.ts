@@ -2,6 +2,11 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import svgLoader from 'vite-svg-loader'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import Inspect from 'vite-plugin-inspect'
+
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -31,50 +36,24 @@ export default defineConfig({
         //   path.resolve(__dirname, 'src/assets/svgIcons/**') // 排除需要 symbol 模式的目录
         // ]
       }
-    })
-    // AutoImport({
-    //   // Auto import functions from Vue, e.g. ref, reactive, toRef...
-    //   // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-    //   imports: ['vue'],
-    //
-    //   // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
-    //   // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
-    //   resolvers: [
-    //     ElementPlusResolver(),
-    //
-    //     // Auto import icon components
-    //     // 自动导入图标组件
-    //     IconsResolver({
-    //       prefix: 'Icon',
-    //       enabledCollections: ['ep']
-    //     })
-    //   ],
-    // }),
-    // Components({
-    //   resolvers: [
-    //     // Auto register icon components
-    //     // 自动注册图标组件
-    //     IconsResolver({
-    //       prefix: 'Icon',
-    //       enabledCollections: ['ep']
-    //     }),
-    //     // Auto register Element Plus components
-    //     // 自动导入 Element Plus 组件
-    //     ElementPlusResolver({ importStyle: 'sass' })
-    //   ],
-    //
-    // }),
-    // Icons({
-    //   autoInstall: true
-    // }),
-    // Inspect()
+    }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      dts: true,
+      dirs: ['src/**'],
+      resolvers: [ElementPlusResolver({importStyle: 'sass'})],
+    }),
+    Inspect(),
   ],
-
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/assets/styles/element-vars.scss" as *;`
+        additionalData: `@use "@/assets/styles/element-vars.scss" as *;
+                          @use "@/assets/styles/vars.scss" as *;`
       }
     }
-  }
+  },
+
 })

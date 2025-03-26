@@ -233,20 +233,12 @@
             <span>历史诊断</span>
           </div>
           <div class="report-item__content history-diag__content">
-            <div class="history-diag__item">
+            <div class="history-diag__item" v-for="item in reportInfo.historyDiags">
               <div class="doctor-name">
-                <span>王德民</span>
+                <span>{{item.doctor}}</span>
               </div>
               <div class="ex-conclusion">
-                建议进行荧光血管造影检查，结合 患者年龄和症状表现，需要排除早 期糖尿病性视网膜病变的可能。
-              </div>
-            </div>
-            <div class="history-diag__item">
-              <div class="doctor-name">
-                <span>王德民</span>
-              </div>
-              <div class="ex-conclusion">
-                建议进行荧光血管造影检查，结合 患者年龄和症状表现，需要排除早 期糖尿病性视网膜病变的可能。
+                {{item.diagnosis}}
               </div>
             </div>
           </div>
@@ -348,6 +340,7 @@
         imageInfo.value = result.imageInfo
         aiDiagInfo.value = result.aiDiagInfo
         reportInfo.value = result.reportInfo
+        saveQuery.value.currentDisease = reportInfo.value.diseaseTypes;
       })
     },
     { immediate: true } // 立即执行一次以处理初始路由
@@ -375,12 +368,17 @@
     diseaseTypes: [] as string[]
   })
 
-  const formatDate = (dateArray: string) => {
-    if (!dateArray || dateArray.length < 3) return '无效日期'
-    const [year, month, day] = dateArray
+  const formatDate = (dateArray: string, dateTime:boolean = false) => {
+    if (!dateArray || dateArray.length < 5) return '无效日期'
+    const [year, month, day, hour, time] = dateArray
     // 使用 padStart 补零
     const paddedMonth = month.toString().padStart(2, '0')
     const paddedDay = day.toString().padStart(2, '0')
+    if(dateTime){
+      const paddedHour = hour.toString().padStart(2, '0')
+      const paddedTime = time.toString().padStart(2, '0')
+      return `${year}-${paddedMonth}-${paddedDay} ${paddedHour}:${paddedTime}`;
+    }
     return `${year}-${paddedMonth}-${paddedDay}`
   }
 
@@ -517,5 +515,5 @@
 </script>
 
 <style scoped lang="scss">
-  @import 'styles';
+  @use 'styles';
 </style>

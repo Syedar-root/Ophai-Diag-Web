@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:color';
+@use'sass:math';
 $colors: (
   primary: #3ea2e4,
   success: #43cd88,
@@ -12,10 +13,10 @@ $MaxStep: 9;
 // 生成浅色和深色变体
 @each $key, $value in $colors {
   @for $i from 1 through $MaxStep {
-    $light: color.mix(#fff, $value, ($i / ($MaxStep + 1)) * 100%);
+    $light: color.mix(#fff, $value, (math.div($i, $MaxStep + 1)) * 100%);
     $colors: map.merge($colors, (#{$key}-light-#{$i}: $light));
 
-    $dark: color.mix(#000, $value, ($i / ($MaxStep + 1)) * 100%);
+    $dark: color.mix(#000, $value, (math.div($i, $MaxStep + 1)) * 100%);
     $colors: map.merge($colors, (#{$key}-dark-#{$i}: $dark));
   }
 }
@@ -39,7 +40,7 @@ $colors: map.merge(
 // 生成中性色
 $MaxStep: 15;
 @for $i from 1 through $MaxStep {
-  $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), ($i / ($MaxStep + 1)) * 100%);
+  $neutral: color.mix(map.get($colors, _white), map.get($colors, _black), (math.div($i, $MaxStep + 1)) * 100%);
   $colors: map.merge($colors, (neutral-#{$i}: $neutral));
 }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { radarChartProps } from '@/components/common/radarChart/types'
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted,watch,onUnmounted } from 'vue'
   import * as echarts from 'echarts'
 
   const chartDom = ref<HTMLElement | null>(null)

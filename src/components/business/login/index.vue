@@ -165,12 +165,12 @@
                 </el-col>
               </el-row>
               <el-row :gutter="10">
-                <el-col :span="8">
+                <el-col :span="12">
                   <el-form-item prop="hospital" label="所属医院" label-position="top">
                     <el-input placeholder="请输入医院" v-model="registerQuery.hospital"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="12">
                   <el-form-item prop="position" label="职位" label-position="top">
                     <el-input placeholder="请输入职称" v-model="registerQuery.position"></el-input>
                   </el-form-item>

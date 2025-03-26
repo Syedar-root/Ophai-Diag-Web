@@ -55,7 +55,6 @@ $border-color: map.get(vars.$colors, neutral-14);
   &__left {
     width: 25%;
     position: relative;
-    flex-grow: 1;
     height: 100%;
     flex-shrink: 0;
     padding: $container-padding;
@@ -68,14 +67,13 @@ $border-color: map.get(vars.$colors, neutral-14);
     width: 20%;
     background-color: #fff;
     position: relative;
-    flex-grow: 1;
     height: 100%;
     flex-shrink: 0;
     padding: $container-padding;
   }
   &__center {
     position: relative;
-    flex-grow: 1;
+    width: 55%;
     height: auto;
     min-height: 100%;
     padding: $container-padding;
@@ -146,17 +144,22 @@ $border-color: map.get(vars.$colors, neutral-14);
       position: relative;
       width: 100%;
       height: auto;
+      max-height: 180px;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       justify-content: start;
-      align-items: start;
+      align-items: center;
       $gap: map.get(vars.$space, s);
       gap: $gap;
       margin-top: $gap;
+      &::-webkit-scrollbar {
+        opacity: 0;
+      }
     }
     &__item {
       position: relative;
-      width: 100%;
+      width: 90%;
       height: auto;
       display: flex;
       align-items: center;

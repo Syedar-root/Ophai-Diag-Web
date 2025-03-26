@@ -42,32 +42,40 @@
       </el-row>
     </div>
     <div class="cm-main">
-      <el-table :data="tableData.items" header-row-class-name="tb-header-row-style">
-        <el-table-column prop="caseId" label="病例ID" width=""></el-table-column>
-        <el-table-column prop="patientId" label="患者ID" width=""></el-table-column>
-        <el-table-column prop="patientName" label="患者姓名" width=""></el-table-column>
-        <el-table-column prop="age" label="年龄" width=""></el-table-column>
-        <el-table-column prop="gender" label="性别" width="">
+      <el-table :data="tableData.items" header-row-class-name="tb-header-row-style" :row-style="{minHeight: '80px'}">
+        <el-table-column prop="caseId" label="病例ID" width="200"></el-table-column>
+        <el-table-column prop="patientId" label="患者ID" width="200"></el-table-column>
+        <el-table-column prop="patientName" label="患者姓名" width="auto"></el-table-column>
+        <el-table-column prop="age" label="年龄" width="auto"></el-table-column>
+        <el-table-column prop="gender" label="性别" width="auto">
           <template #default="scope">
             {{ gender.find(item => item.value === scope.row.gender)?.label || '未知状态' }}
           </template>
         </el-table-column>
-        <el-table-column prop="diseaseType" label="疾病分类" width="">
+        <el-table-column prop="diseaseType" label="疾病类型" width="auto">
           <template #default="scope">
             <div>
               <el-tag v-for="item in tableData.items[scope.$index].diseaseType" type="primary">{{item}}</el-tag>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="diagStatus" label="诊断状态" width="">
+        <el-table-column prop="diagStatus" label="诊断状态" width="auto">
           <template #default="scope">
             {{ diagStatus.find(item => item.value === scope.row.diagStatus)?.label || '未知状态' }}
           </template>
         </el-table-column>
-        <el-table-column prop="responsibleDoctor" label="责任医师" width=""></el-table-column>
-        <el-table-column prop="createDate" label="创建时间" width=""></el-table-column>
-        <el-table-column prop="updateDate" label="更新时间" width=""></el-table-column>
-        <el-table-column label="操作" width="">
+        <el-table-column prop="responsibleDoctor" label="责任医师" width="auto"></el-table-column>
+        <el-table-column prop="createDate" label="创建时间" width="auto">
+          <template #default="scope">
+            {{ formatDate(tableData.items[scope.$index].createDate, true) }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="updateDate" label="更新时间" width="auto">
+          <template #default="scope">
+            {{ formatDate(tableData.items[scope.$index].updateDate, true) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="auto">
           <template #default="scope">
             <div class="table-opt">
               <el-icon @click="handleViewCase(tableData.items[scope.$index]?.caseId)">
@@ -96,6 +104,7 @@
   import { useRouter } from 'vue-router'
   import { type CaseListQuery, type CaseListViewObj } from '@/view/cm/types.ts'
   import { getCaseListService } from '@/api/cm'
+  import { getCaseListViewObj } from '@/view/cm/types.ts'
 
   onMounted(() => {
     handleSearch()
@@ -105,12 +114,12 @@
     pageNum: 1,
     pageSize: 10,
     patientInfoPatientId: '',
-    diseaseType: 0,
-    diagStatus: 0
+    diseaseType: -1,
+    diagStatus: -1
   })
 
   const diseaseType = [
-    { label: '全部', value: 0 },
+    { label: '全部', value: -1 },
     { label: '糖尿病', value: 1 },
     { label: '青光眼', value: 2 },
     { label: '白内障', value: 3 },
@@ -120,7 +129,7 @@
     { label: '其他疾病', value: 7 }
   ]
   const diagStatus = [
-    { label: '全部', value: 0 },
+    { label: '全部', value: -1 },
     { label: '未诊断', value: 1 },
     { label: '诊断中', value: 2 },
     { label: '已诊断', value: 3 }
@@ -129,7 +138,7 @@
   const gender = [
     { label: '男', value: 0 },
     { label: '女', value: 1 },
-    { label: '其他', value: 2 }
+    { label: '其他', value: -1 }
   ]
 
   const tableData = ref<CaseListViewObj>({
@@ -155,25 +164,25 @@
     console.log(query.value)
     getCaseListService(query.value).then(res => {
       // 映射数据
-      tableData.value.items = res.items.map(item => {
-        return {
-          caseId: item.caseId,
-          diseaseType: item.diseaseType,
-          diagStatus: item.diagStatus,
-          patientId: item.patientInfo.patientId,
-          patientName: item.patientInfo.patientName,
-          gender: item.patientInfo.gender,
-          age: item.patientInfo.age,
-          createDate: item.createDate,
-          updateDate: item.updateDate,
-          responsibleDoctor: item.responsibleDoctor
-        }
-      })
-      tableData.value.total = res.total
+      tableData.value = getCaseListViewObj(res);
     })
+  }
+
+  const formatDate = (dateArray: string, dateTime:boolean = false) => {
+    if (!dateArray || dateArray.length < 5) return '无效日期'
+    const [year, month, day, hour, time] = dateArray
+    // 使用 padStart 补零
+    const paddedMonth = month.toString().padStart(2, '0')
+    const paddedDay = day.toString().padStart(2, '0')
+    if(dateTime){
+      const paddedHour = hour.toString().padStart(2, '0')
+      const paddedTime = time.toString().padStart(2, '0')
+      return `${year}-${paddedMonth}-${paddedDay} ${paddedHour}:${paddedTime}`;
+    }
+    return `${year}-${paddedMonth}-${paddedDay}`
   }
 </script>
 
 <style scoped lang="scss">
-  @import 'styles';
+  @use 'styles';
 </style>

@@ -2,6 +2,7 @@
   import { onMounted } from 'vue'
 
   onMounted(() => {
+    performance.mark('vue-app-mounted');
     let app = document.getElementById('app')
     if (!app) return
     app.style.maxWidth = '100vw'

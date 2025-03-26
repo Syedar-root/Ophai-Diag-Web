@@ -5,6 +5,9 @@
   import SvgIcon from '@/components/common/svgIcon/index.vue'
   import GithubIcon from '@/assets/icons/github.svg'
   const route = useRoute()
+  const toDocs = () => {
+    window.open(import.meta.env.VITE_DOCS_URL, '_blank')
+  }
 </script>
 
 <template>
@@ -29,7 +32,7 @@
       </div>
     </div>
     <div class="nav__user-area">
-      <div class="icon-item">
+      <div class="icon-item" @click="toDocs">
         <el-icon><Document /></el-icon>
       </div>
       <div class="icon-item">

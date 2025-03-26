@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
   import type { svgIconProps } from '@/components/common/svgIcon/types.ts'
-  import { defineProps, computed } from 'vue'
+  import { defineProps, computed,defineComponent } from 'vue'
 
   const props = defineProps<svgIconProps>()
 

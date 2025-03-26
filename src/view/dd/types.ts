@@ -73,8 +73,13 @@ export function getViewObj(res: any): any {
   const reportInfo: ReportViewObj = {
     createDate: res.createDate,
     responsibleDoctor: res.responsibleDoctor,
-    historyDiags: res.historyCases,
-    diseaseTypes: res.diseaseTypes
+    historyDiags: res.doctorDiags.map((item: any) => {
+      return {
+        doctor: item.doctorName,
+        diagnosis: item.docSuggestions
+      }
+    }),
+    diseaseTypes: res.diseaseName
   }
 
   return { patientInfo: patientInfo, imageInfo: imageInfo, aiDiagInfo: aiDiagInfo, reportInfo: reportInfo }

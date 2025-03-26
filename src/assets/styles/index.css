@@ -1,3 +1,4 @@
-@import './vars.scss';
+/*@import './vars.scss';*/
 @import './reset.scss';
 @import './resetElement.scss';
+/*@import "element-vars.scss";*/

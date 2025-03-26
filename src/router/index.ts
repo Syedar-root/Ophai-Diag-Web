@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
         name: 'Diseasediagnosis',
         component: () => import('../view/dd/index.vue'),
         props: true
-      }
+      },
     ]
   },
   {
@@ -37,7 +37,7 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

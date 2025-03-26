@@ -1,9 +1,10 @@
 @use '@/assets/styles/vars.scss' as vars;
+@use "sass:map";
 @use '@/assets/styles/resetElement.scss' as resetElement;
 
 // 组件样式变量定义
-$container-clr--bg: map-get(vars.$colors, neutral-1);
-$title-clr--text: map-get(vars.$colors, neutral-2);
+$container-clr--bg: map.get(vars.$colors, neutral-1);
+$title-clr--text: map.get(vars.$colors, neutral-2);
 
 .login-container {
   position: absolute;
@@ -17,10 +18,11 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
   align-items: center;
   background-color: rgba($container-clr--bg, 0.5);
   backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 
 @mixin base-content {
-  background-color: map-get(vars.$colors, _white);
+  background-color: map.get(vars.$colors, _white);
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -28,7 +30,7 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
   padding: 1rem;
   gap: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 10px rgba(map-get(vars.$colors, neutral-5), 0.5);
+  box-shadow: 0 10px 10px rgba(map.get(vars.$colors, neutral-5), 0.5);
   transition: 0.3s ease-in-out;
 }
 
@@ -38,6 +40,7 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
   min-width: 16rem;
   min-height: 32rem;
   @include base-content;
+  overflow: hidden;
 
   .login-section {
     height: 100%;
@@ -73,12 +76,12 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
 }
 
 .login-content__title {
-  //color: map-get(vars.$colors,neutral-2);
+  //color: map.get(vars.$colors,neutral-2);
   width: 100%;
   height: 10%;
   color: $title-clr--text;
   font-weight: bold;
-  font-size: map-get(vars.$font-size, xl);
+  font-size: map.get(vars.$font-size, xl);
 }
 
 .login-content__form {
@@ -110,7 +113,7 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
         .el-icon {
           font-size: 1rem;
           svg path {
-            fill: map-get(vars.$colors, neutral-5);
+            fill: map.get(vars.$colors, neutral-5);
           }
         }
       }
@@ -118,17 +121,17 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
-        //background-color: map-get(vars.$colors,primary);
+        //background-color: map.get(vars.$colors,primary);
         @include resetElement.resetButton();
       }
 
       .el-link {
-        //color: map-get(vars.$colors,primary);
+        //color: map.get(vars.$colors,primary);
         &:after {
           border: 0;
         }
         .el-link__inner {
-          $underline-color: map-get(vars.$colors, primary-dark-1);
+          $underline-color: map.get(vars.$colors, primary-dark-1);
           background: linear-gradient(to right, $underline-color, $underline-color) no-repeat right bottom;
           background-size: 0 2px;
           transition-duration: 0.3s;
@@ -151,40 +154,46 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
   width: 100%;
   flex-grow: 1;
   a {
-    font-size: map-get(vars.$font-size, s);
-    color: map-get(vars.$colors, neutral-5);
+    font-size: map.get(vars.$font-size, s);
+    color: map.get(vars.$colors, neutral-5);
     underline: none;
   }
 }
 
 .register-content {
+  position: relative;
   width: 40%;
   height: auto;
-  min-width: 24rem;
-  min-height: 60%;
+  min-width: 18rem;
+  min-height: 70%;
   max-height: 80%;
   @include base-content;
   gap: 0;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .register-content__title {
+  position: relative;
   width: 100%;
-  height: 10%;
+  height: auto;
   color: $title-clr--text;
-  font-weight: bold;
-  font-size: map-get(vars.$font-size, xl);
+  font-weight: map.get(vars.$font-weight, bold);
+  font-size: map.get(vars.$font-size, xxl);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
+  margin-top: 5%;
 }
 .register-content__text {
   width: 100%;
   height: 5%;
   color: $title-clr--text;
   font-weight: normal;
-  font-size: map-get(vars.$font-size, s);
+  font-size: map.get(vars.$font-size, s);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,6 +201,7 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
 }
 
 .register-content__form {
+  width: 90%;
   :deep {
     .el-form-item {
       .el-form-item__label {
@@ -210,7 +220,6 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
         width: 100%;
         height: clamp(1.5rem, 2.5rem, 3rem);
         border-radius: 0.3rem;
-        //background-color: map-get(vars.$colors,primary);
         @include resetElement.resetButton();
       }
     }
@@ -219,12 +228,12 @@ $title-clr--text: map-get(vars.$colors, neutral-2);
 
 .register-content--login {
   a {
-    font-size: map-get(vars.$font-size, s);
+    font-size: map.get(vars.$font-size, s);
     color: $title-clr--text;
     underline: none;
 
     span {
-      color: map-get(vars.$colors, primary);
+      color: map.get(vars.$colors, primary);
     }
   }
 }

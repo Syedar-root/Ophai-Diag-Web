@@ -1,37 +1,31 @@
 @use 'sass:map';
-$colors: (
-  primary: #3ea2e4,
-  success: #43cd88,
-  info: #bebebe,
-  warning: #ffb15f,
-  danger: #f74047
-);
+@use "vars" as vars;
 /* 只需要重写你需要的即可 */
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
     'primary': (
       // 主色
-      'base': map.get($colors, primary)
+      'base': map.get(vars.$colors, primary)
     ),
     'success': (
       // 成功色
-      'base': map.get($colors, success)
+      'base': map.get(vars.$colors, success)
     ),
     'warning': (
       // 警告色
-      'base': map.get($colors, warning)
+      'base': map.get(vars.$colors, warning)
     ),
     'danger': (
       // 危险色
-      'base': map.get($colors, danger)
+      'base': map.get(vars.$colors, danger)
     ),
     'error': (
       // 错误色
-      'base': map.get($colors, danger)
+      'base': map.get(vars.$colors, danger)
     ),
     'info': (
       // 信息色
-      'base': map.get($colors, info)
+      'base': map.get(vars.$colors, info)
     )
   )
 );
